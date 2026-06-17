@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satya Ganesh | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="satya.css">
+</head>
+<body>
+
+    <canvas id="bg-matrix"></canvas>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text interactive-logo-text" onmousemove="tiltLogoText(event)" onmouseleave="resetLogoText()">
+                    <span>S</span><span>a</span><span>t</span><span>y</span><span>a</span><span>&nbsp;</span><span>G</span><span>a</span><span>n</span><span>e</span><span>s</span><span>h</span>
+                </span>
+            </div>
+            <div class="links" id="links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>     
+                <a href="#projects">Projects</a> 
+            </div>
+            <a href="#contact" class="nav-btn-link"><button class="nav-btn">Contact Us</button></a>
+            <div class="hamburg" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+    
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="photo-container smart-portal tilt-card">
+                <img src="img.jpg" alt="Satya Ganesh">
+                
+                <div class="data-tag tag-top" onclick="showTagMetric(this)" data-metric="🎓 B.Tech Graduate (Autonomous) | 2024">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="data-tag tag-mid" onclick="showTagMetric(this)" data-metric="📊 APSCHE Data Analytics Tableau Intern">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <div class="data-tag tag-bottom" onclick="showTagMetric(this)" data-metric="💻 Frontend Developer | React.js & JS">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                
+                <div class="hud-display-box">
+                    <span id="hud-metric-text">Click on tags to inspect background</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h1>Hi! I am</h1>
+                <span class="glitch-text">Satya Ganesh</span>
+                <p class="tagline">Frontend Developer & Data Analytics Enthusiast</p>
+                <div class="buttons">
+                    <button class="btn-primary" onclick="location.href='#contact'">Hire Me</button>
+                    <button class="btn-secondary" onclick="location.href='#projects'">See My Work</button>     
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="section-padding">
+       <div class="about-card tilt-card">
+          <div class="about-header-row">
+              <h1 class="section-title">About Me</h1>
+              <div class="ai-toggle-wrapper">
+                  <span class="toggle-label">Human Bio</span>
+                  <label class="switch-node">
+                      <input type="checkbox" id="ai-bio-switch" onchange="toggleBioView()">
+                      <span class="slider-round"></span>
+                  </label>
+                  <span class="toggle-label ai-label">AI Executive Summary</span>
+              </div>
+          </div>
+          <div class="about-grid">
+              <div class="about-text">
+                  <p class="satya-name">Gunnepalli Veera Venkata Satya Ganesh</p>
+                  <div id="bio-display-box" class="bio-container">
+                      <p class="self-desc dynamic-fade">
+                         I'm a highly motivated and detail-oriented computer science student with a deep passion for modern frontend engineering and data insights. As a quick learner, I enjoy tackling architectural challenges, designing intuitive interfaces, and breaking down complex problems. Outside of writing code, I love listening to music, watching movies, and traveling to explore new environments.
+                      </p>
+                  </div>
+              </div>
+              <div class="about-img-box">
+                  <img class="about-avatar" src="about.jpg" alt="Satya Portrait">
+              </div>
+          </div>
+       </div>
+    </section>
+   
+    <section id="education" class="section-padding">
+        <h1 class="section-title">Education Journey</h1>
+        <div class="timeline">
+            <div class="timeline-item tilt-card">
+                <span class="year">2020 - 2024</span>
+                <h2>B.Tech</h2>
+                <p class="inst">Srinivasa Institute of Engineering and Technology, Amalapuram</p>
+                <p class="grade">Autonomous | Excellence Track</p>
+            </div>
+            <div class="timeline-item tilt-card">
+                <span class="year">2020 - 2024</span>
+                <h2>Diploma</h2>
+                <p class="inst">Smt. B. Seetha Polytechnic, Vishnu, Bhimavaram</p>
+                <p class="grade">SBTET Affiliated</p>
+            </div>
+            <div class="timeline-item tilt-card">
+               <span class="year">2017 - 2020</span>
+               <h2>High School</h2>
+               <p class="inst">Sri Kakatiya Merit High School, Bhimavaram</p>
+               <p class="grade">SSC Board</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section-padding">
+        <h1 class="section-title">Technical & Core Skills</h1>
+        <div class="skills-grid">
+            <div class="skill-node tilt-card"><i class="fa-solid fa-comments"></i><p>Communication</p></div>
+            <div class="skill-node tilt-card"><i class="fa-solid fa-users"></i><p>Teamwork</p></div>
+            <div class="skill-node tilt-card"><i class="fa-solid fa-lightbulb"></i><p>Problem-Solving</p></div>
+            <div class="skill-node tilt-card"><i class="fa-solid fa-user-tie"></i><p>Leadership</p></div>
+            <div class="skill-node tilt-card"><i class="fa-brands fa-html5"></i><p>HTML5 / CSS3</p></div>
+            <div class="skill-node tilt-card"><i class="fa-brands fa-js"></i><p>JavaScript</p></div>
+            <div class="skill-node tilt-card"><i class="fa-brands fa-react"></i><p>React.js</p></div>
+            <div class="skill-node tilt-card"><i class="fa-solid fa-database"></i><p>Data Analytics & DSA</p></div>
+        </div>
+    </section>
+
+    <section id="projects" class="section-padding">
+         <div class="projects-header-block">
+             <h1 class="section-title">Featured Projects</h1>
+             
+             <div class="ai-search-wrapper tilt-card">
+                 <i class="fa-solid fa-wand-magic-sparkles ai-search-icon"></i>
+                 <input type="text" id="ai-project-search" placeholder="Type intent (e.g., 'show me analytics tools' or 'local shop work')..." oninput="runAISemanticSearch()">
+                 <div id="ai-search-feedback" class="search-feedback-tag">AI Semantic Engine Idle</div>
+             </div>
+         </div>
+
+         <div class="projects-grid">
+             <div class="project-card tilt-card" id="project-card-portfolio" onclick="openProjectModal('portfolio')">
+                 <div class="img-wrapper"><img src="satya21.jpg" alt="Personal Portfolio"></div>
+                 <div class="card-meta">
+                     <h3>Personal Portfolio</h3>
+                     <p>Interactive 3D workspace showcasing developer frameworks and performance metrics.</p>
+                     <span class="view-more-tag">Click to view details →</span>
+                 </div>
+             </div>
+             <div class="project-card tilt-card" id="project-card-data-analytics" onclick="openProjectModal('data-analytics')">
+                 <div class="img-wrapper"><img src="satya212.png" alt="Data Analytics Dashboards"></div>
+                 <div class="card-meta">
+                     <h3>Data Analytics & Tableau Internships</h3>
+                     <p>Virtual internship intelligence frameworks managing dynamic data and trends visualization.</p>
+                     <span class="view-more-tag">Click to view details →</span>
+                 </div>
+             </div>
+             <div class="project-card tilt-card" id="project-card-ecommerce" onclick="openProjectModal('ecommerce')">
+                 <div class="img-wrapper"><img src="satya213.jpg" alt="E-commerce Architecture"></div>
+                 <div class="card-meta">
+                     <h3>E-commerce Ecosystem</h3>
+                     <p>A responsive shopping interface layout featuring clean, modern user experience styling.</p>
+                     <span class="view-more-tag">Click to view details →</span>
+                 </div>
+             </div>
+         </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="contact-card tilt-card">
+            <h1 class="section-title">Get In Touch</h1>
+            <div class="contact-split">
+                <div class="contact-info">
+                    <h2>Let's build something remarkable together</h2>
+                    <p>I am currently looking for fresh engineering roles and analytical projects. Drop a message or ring my line anytime!</p>
+                    <div class="channels">
+                        <div class="channel-row"><i class="fa-brands fa-whatsapp"></i> <span>+91 7396737874</span></div>
+                        <div class="channel-row"><i class="fa-solid fa-mobile-screen-button"></i> <span>+91 7396737874</span></div>
+                    </div>
+                    <div class="social-links">
+                       <a href="https://www.facebook.com/srinu.srinuvasu.9843" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                       <a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                       <a href="https://www.instagram.com/satya_21___/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                       <a href="https://www.linkedin.com/in/gunnepalli-ganesh-649466320/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="event.preventDefault();">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="text" placeholder="Subject" required>
+                    <div class="input-ai-container">
+                        <textarea id="contact-msg-input" placeholder="Your Message..." rows="5" required oninput="analyzeMessageSentiment()"></textarea>
+                        <div id="ai-sentiment-meter" class="sentiment-meter-node">
+                            <i class="fa-solid fa-brain"></i> <span id="sentiment-text">AI Tone Engine Idle</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="project-modal" class="modal-overlay" onclick="closeProjectModal(event)">
+        <div class="modal-content tilt-card">
+            <span class="modal-close" onclick="document.getElementById('project-modal').classList.remove('active')">&times;</span>
+            <div class="modal-body-layout">
+                <div class="modal-img-container">
+                    <img id="modal-img" src="" alt="Project Image">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modal-title">Project Title</h2>
+                    <p id="modal-desc">Detailed project breakdowns go here.</p>
+                    <div class="modal-tech-stack">
+                        <h3>Technologies Used:</h3>
+                        <div id="modal-badges" class="badges-row"></div>
+                    </div>
+                    <div class="modal-actions">
+                        <a id="modal-live-link" href="#" target="_blank" class="btn-primary-link"><button class="btn-primary">Live Demo</button></a>
+                        <a id="modal-repo-link" href="#" target="_blank" class="btn-secondary-link"><button class="btn-secondary">View Code</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ai-widget" class="ai-chat-widget">
+        <div class="chat-trigger-btn" onclick="toggleChatWindow()">
+            <i class="fa-solid fa-robot"></i>
+            <span class="trigger-alert-dot"></span>
+        </div>
+        <div id="chat-window" class="chat-window-layout tilt-card">
+            <div class="chat-header">
+                <div class="avatar-status-box">
+                    <i class="fa-solid fa-robot chat-avatar-icon"></i>
+                    <div>
+                        <h4>Satya's AI Twin</h4>
+                        <span class="status-indicator">Online</span>
+                    </div>
+                </div>
+                <span class="close-chat" onclick="toggleChatWindow()">&times;</span>
+            </div>
+            <div id="chat-stream-box" class="chat-message-display">
+                <div class="system-msg msg-row">Hi there! Ask me anything about Satya's projects, core technical skills, or professional availability.</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-user-query" placeholder="Ask AI Twin..." onkeydown="if(event.key === 'Enter') sendChatMessage()">
+                <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+          <p>&copy; 2026 Satya Ganesh. Handcrafted from scratch.</p>
+        </div>
+    </footer> 
+
+    <script src="satya.js"></script>
+</body>
+</html>
