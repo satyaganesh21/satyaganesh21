@@ -616,17 +616,16 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     border: none !important;
 }
 /* ==========================================================================
-   UPDATED ADVANCED FEATURE: OPTION 1 - CLEAN TECH MINIMAL LIGHT THEME
+   OPTION 1 - CLEAN TECH MINIMAL LIGHT THEME
    ========================================================================== */
 [data-theme="light"] {
-    --bg-dark: #f8fafc;        /* Fresh slate white background */
-    --text-light: #0f172a;     /* Deep navy text (highly readable) */
-    --text-muted: #64748b;     /* Soft slate text for descriptions */
-    --glass-bg: rgba(255, 255, 255, 0.75); /* Clean white card base */
-    --glass-border: rgba(15, 23, 42, 0.08); /* Crisp subtle card borders */
+    --bg-dark: #f8fafc;        
+    --text-light: #0f172a;     
+    --text-muted: #64748b;     
+    --glass-bg: rgba(255, 255, 255, 0.75); 
+    --glass-border: rgba(15, 23, 42, 0.08); 
 }
 
-/* Light mode overrides for special components */
 [data-theme="light"] .logo-text span {
     background: linear-gradient(135deg, #0f172a 30%, var(--primary-color) 70%);
     -webkit-background-clip: text;

@@ -382,7 +382,9 @@ function resetLogoText() {
     if (logoContainer) {
         logoContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
     }
-}// ==========================================================================
+}
+
+// ==========================================================================
 // NEW FEATURE ENHANCEMENTS: PAGE LOADER & NAV SCROLL SPY
 // ==========================================================================
 
@@ -390,7 +392,6 @@ function resetLogoText() {
 window.addEventListener('load', () => {
     const preloader = document.getElementById('page-loader');
     if (preloader) {
-        // Subtle extra 300ms delay for visual satisfaction, then fades out smoothly
         setTimeout(() => {
             preloader.classList.add('fade-out');
         }, 300);
@@ -403,7 +404,7 @@ const menuNavigationLinks = document.querySelectorAll('.links a');
 
 const scrollSpyObserverOptions = {
     root: null,
-    rootMargin: '-30% 0px -60% 0px', // Triggers focus based on viewport coverage area
+    rootMargin: '-30% 0px -60% 0px',
     threshold: 0
 };
 
@@ -422,8 +423,8 @@ const scrollSpyObserver = new IntersectionObserver((entries) => {
     });
 }, scrollSpyObserverOptions);
 
-// Attach observer track parameters to all active page sections
 pageSections.forEach(section => scrollSpyObserver.observe(section));
+
 // ==========================================================================
 // NEW FEATURE ENHANCEMENTS: TYPING CAROUSEL & PROJECT GRID FILTER ENGINE
 // ==========================================================================
@@ -450,7 +451,6 @@ function runTypingCarouselPipeline() {
     const targetFullPhrase = typingPhrases[currentPhraseIndex];
     
     if (!isErasingPhrase) {
-        // Appending characters one by one
         textContainer.textContent = targetFullPhrase.substring(0, currentCharIndex + 1);
         currentCharIndex++;
         
@@ -460,7 +460,6 @@ function runTypingCarouselPipeline() {
             return;
         }
     } else {
-        // Removing characters one by one
         textContainer.textContent = targetFullPhrase.substring(0, currentCharIndex - 1);
         currentCharIndex--;
         
@@ -473,23 +472,19 @@ function runTypingCarouselPipeline() {
     setTimeout(runTypingCarouselPipeline, isErasingPhrase ? erasingSpeedMs : typingSpeedMs);
 }
 
-// Fire up the typing engine cycle on execution
 document.addEventListener('DOMContentLoaded', runTypingCarouselPipeline);
-
 
 // --- Project Category Filter Tab Logic ---
 function filterProjects(selectedCategory) {
-    // 1. Update active button classes highlight states
     const allFilterButtons = document.querySelectorAll('.filter-btn');
     allFilterButtons.forEach(btn => btn.classList.remove('active'));
     
-    // Find clicked button to set active style state
-    const clickedButton = event.currentTarget;
-    if (clickedButton) clickedButton.classList.add('active');
+    // Fixed: Correctly reading event parameters dynamically
+    if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.classList.add('active');
+    }
     
-    // 2. Filter target project card element layouts
     const allProjectCards = document.querySelectorAll('.project-card');
-    
     allProjectCards.forEach(card => {
         const cardCategory = card.getAttribute('data-category');
         
@@ -500,6 +495,7 @@ function filterProjects(selectedCategory) {
         }
     });
 }
+
 // ==========================================================================
 // NEW FEATURE ENHANCEMENT: DYNAMIC LIGHT/DARK THEME SWITCHER
 // ==========================================================================
@@ -509,19 +505,16 @@ function toggleTheme() {
     const themeButtonIcon = document.querySelector('#theme-toggle i');
     
     if (currentTheme === 'light') {
-        // Switch to Dark Mode
         rootElement.removeAttribute('data-theme');
-        themeButtonIcon.className = 'fa-solid fa-moon';
+        if (themeButtonIcon) themeButtonIcon.className = 'fa-solid fa-moon';
         localStorage.setItem('theme', 'dark');
     } else {
-        // Switch to Light Mode
         rootElement.setAttribute('data-theme', 'light');
-        themeButtonIcon.className = 'fa-solid fa-sun';
+        if (themeButtonIcon) themeButtonIcon.className = 'fa-solid fa-sun';
         localStorage.setItem('theme', 'light');
     }
 }
 
-// Check local storage on page load to remember user's choice
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
