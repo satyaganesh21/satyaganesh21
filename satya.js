@@ -382,4 +382,45 @@ function resetLogoText() {
     if (logoContainer) {
         logoContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
     }
-}
+}// ==========================================================================
+// NEW FEATURE ENHANCEMENTS: PAGE LOADER & NAV SCROLL SPY
+// ==========================================================================
+
+// --- Loader System Run Logic ---
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('page-loader');
+    if (preloader) {
+        // Subtle extra 300ms delay for visual satisfaction, then fades out smoothly
+        setTimeout(() => {
+            preloader.classList.add('fade-out');
+        }, 300);
+    }
+});
+
+// --- Active Link Scroll Spy Loop Logic ---
+const pageSections = document.querySelectorAll('section');
+const menuNavigationLinks = document.querySelectorAll('.links a');
+
+const scrollSpyObserverOptions = {
+    root: null,
+    rootMargin: '-30% 0px -60% 0px', // Triggers focus based on viewport coverage area
+    threshold: 0
+};
+
+const scrollSpyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const currentActiveId = entry.target.getAttribute('id');
+            
+            menuNavigationLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentActiveId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}, scrollSpyObserverOptions);
+
+// Attach observer track parameters to all active page sections
+pageSections.forEach(section => scrollSpyObserver.observe(section));

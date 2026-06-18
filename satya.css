@@ -483,4 +483,74 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     background: rgba(252, 166, 31, 0.1);
     border-color: var(--primary-color);
     box-shadow: 0 5px 15px rgba(252, 166, 31, 0.15);
+}/* ==========================================================================
+   NEW ADVANCED FEATURES: LOADER & SCROLL SPY STYLES
+   ========================================================================== */
+
+/* Full Screen Page Loader Overlay */
+#page-loader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #050507;
+    z-index: 9999; /* Higher than navbar to cover everything */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#page-loader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Spinning Glowing Ring */
+.loader-circle {
+    width: 90px;
+    height: 90px;
+    border: 3px solid rgba(255, 255, 255, 0.03);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: loaderSpin 1s linear infinite;
+    box-shadow: 0 0 15px rgba(252, 166, 31, 0.15);
+}
+
+/* Central Logo Monogram Text */
+.loader-logo {
+    position: absolute;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes loaderSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Scroll Spy: Highlight Style for Active Navbar Links */
+.links a.active {
+    color: var(--primary-color) !important;
+    text-shadow: 0 0 10px rgba(252, 166, 31, 0.4);
+    position: relative;
+}
+
+/* Add a clean little line below the active nav item */
+.links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 0;
+    width: 100%; height: 2px;
+    background: var(--primary-color);
+    border-radius: 2px;
 }
