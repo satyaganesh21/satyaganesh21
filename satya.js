@@ -14,7 +14,7 @@ document.querySelectorAll('.links a').forEach(anchor => {
     });
 });
 
-// --- 2. Advanced 3D Interactive Mouse-Tilt & Spotlight Engine ---
+// --- 2. Advanced 3D Interactive Mouse-Tilt Mechanism ---
 const interactiveCards = document.querySelectorAll('.tilt-card');
 
 interactiveCards.forEach(card => {
@@ -22,10 +22,6 @@ interactiveCards.forEach(card => {
         const boundingBox = card.getBoundingClientRect();
         const axisX = e.clientX - boundingBox.left;
         const axisY = e.clientY - boundingBox.top;
-        
-        // Push current calculated coordinates directly into local card CSS Variables
-        card.style.setProperty('--mouse-x', `${axisX}px`);
-        card.style.setProperty('--mouse-y', `${axisY}px`);
         
         // Calculate coordinate offsets mapped normalized between -10 to 10 degrees
         const tiltX = (boundingBox.height / 2 - axisY) / (boundingBox.height / 2) * 10;
