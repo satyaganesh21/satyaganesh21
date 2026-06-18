@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gunnepalli Veera Venkata Satya Ganesh | Personal Portfolio</title>
@@ -158,8 +157,8 @@
              <button class="filter-btn" onclick="filterProjects('frontend')">Frontend Dev</button>
              <button class="filter-btn" onclick="filterProjects('analytics')">Data Analytics</button>
          </div>
-         <div class="projects-grid">
-             <div class="project-card tilt-card" id="project-card-portfolio" onclick="openProjectModal('portfolio')">
+      <div class="projects-grid">
+             <div class="project-card tilt-card" id="project-card-portfolio" data-category="frontend" onclick="openProjectModal('portfolio')">
                  <div class="img-wrapper"><img src="satya21.jpg" alt="Personal Portfolio"></div>
                  <div class="card-meta">
                      <h3>Personal Portfolio</h3>
@@ -167,7 +166,8 @@
                      <span class="view-more-tag">Click to view details →</span>
                  </div>
              </div>
-             <div class="project-card tilt-card" id="project-card-data-analytics" onclick="openProjectModal('data-analytics')">
+             
+             <div class="project-card tilt-card" id="project-card-data-analytics" data-category="analytics" onclick="openProjectModal('data-analytics')">
                  <div class="img-wrapper"><img src="satya212.png" alt="Data Analytics Dashboards"></div>
                  <div class="card-meta">
                      <h3>Data Analytics & Tableau Internships</h3>
@@ -175,7 +175,8 @@
                      <span class="view-more-tag">Click to view details →</span>
                  </div>
              </div>
-             <div class="project-card tilt-card" id="project-card-ecommerce" onclick="openProjectModal('ecommerce')">
+             
+             <div class="project-card tilt-card" id="project-card-ecommerce" data-category="frontend" onclick="openProjectModal('ecommerce')">
                  <div class="img-wrapper"><img src="satya213.jpg" alt="E-commerce Architecture"></div>
                  <div class="card-meta">
                      <h3>E-commerce Ecosystem</h3>
