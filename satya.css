@@ -7,7 +7,7 @@
     --bg-dark: #0a0a0c;
     --text-light: #ffffff;
     --text-muted: #a0a0a5;
-    --glass-bg: rgba(255, 255, 255, 0.02);
+    --glass-bg: rgba(10, 10, 12, 0.95); /* Changed to solid dark base to prevent see-through overlap */
     --glass-border: rgba(255, 255, 255, 0.08);
 }
 
@@ -36,7 +36,7 @@ body {
 nav {
     position: fixed;
     top: 0; left: 0; width: 100%;
-    background: rgba(10, 10, 12, 0.8);
+    background: rgba(10, 10, 12, 0.9);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--glass-border);
     z-index: 2000;
@@ -128,9 +128,11 @@ nav {
 
 /* Sections Styling */
 .section-padding {
-    padding: 100px 30px;
+    padding: 140px 30px !important; /* Proper vertical spacing layout block */
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    clear: both;
 }
 
 .section-title {
@@ -149,12 +151,13 @@ nav {
 }
 
 .tilt-card {
-    background: var(--glass-bg);
+    background: var(--glass-bg) !important;
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(25px) !important; /* Heavy blur properties */
     border-radius: 16px;
     transform-style: preserve-3d;
     transition: transform 0.1s ease, box-shadow 0.3s ease;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* Home / Hero Block */
@@ -163,7 +166,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 120px 30px 60px 30px;
+    padding: 140px 30px 80px 30px !important; /* Fixed padding collapse bug */
+    position: relative;
 }
 
 .hero-content {
@@ -323,7 +327,7 @@ nav {
 /* Timeline Framework */
 .timeline { display: flex; flex-direction: column; gap: 30px; position: relative; padding-left: 20px; }
 .timeline::before { content: ''; position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: var(--glass-border); }
-.timeline-item { padding: 25px; position: relative; }
+.timeline-item { padding: 30px !important; margin-bottom: 25px !important; position: relative; }
 .timeline-item::after { content: ''; position: absolute; left: -25px; top: 30px; width: 12px; height: 12px; background: var(--primary-color); border-radius: 50%; }
 .year { font-size: 0.9rem; color: var(--primary-color); font-weight: 700; }
 .timeline-item h2 { font-size: 1.5rem; margin: 5px 0 10px 0; }
@@ -331,7 +335,7 @@ nav {
 .grade { font-size: 0.9rem; color: var(--text-muted); }
 
 /* Skills Section Grid */
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 20px; }
 .skill-node { padding: 30px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; }
 .skill-node i { font-size: 2.5rem; color: var(--primary-color); }
 .skill-node p { font-weight: 600; }
