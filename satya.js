@@ -109,11 +109,11 @@ window.addEventListener('resize', () => {
 
 // --- 4. Relational Database Content Engine for Projects ---
 const localProjectRecords = {
-    'portfolio': {
+  'portfolio': {
         title: "Personal Portfolio Workspace",
         image: "satya21.jpg",
-        desc: "An ultra-modern developer deployment featuring native JavaScript 3D perspective manipulation, modular glass layout matrices, and optimized runtime tracking engines to yield high visual performance.",
-        badges: ["HTML5", "CSS3 Grid System", "Vanilla JavaScript", "3D Kinetic Engine"],
+        desc: "An ultra-modern, single-page developer deployment featuring native JavaScript 3D perspective manipulation, a custom animated intro preloader, and a navigation scroll spy engine. Built with crisp glassmorphism modular layouts and optimization structures to track active visitor metrics smoothly.",
+        badges: ["HTML5 / CSS3", "Vanilla JavaScript Core", "3D Kinetic Physics", "DOM API Manipulation"],
         live: "https://satyaganesh21.github.io/satyaganesh21/",
         repo: "https://github.com/satyaganesh21/satyaganesh21"
     },
