@@ -614,4 +614,32 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
+}/* ==========================================================================
+   NEW ADVANCED FEATURE: LIGHT & DARK THEME ENGINE
+   ========================================================================== */
+[data-theme="light"] {
+    --bg-dark: #f4f5f7;
+    --text-light: #1a1a1e;
+    --text-muted: #55555a;
+    --glass-bg: rgba(240, 242, 245, 0.9);
+    --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Light mode overrides for special components */
+[data-theme="light"] .logo-text span {
+    background: linear-gradient(135deg, #000 30%, var(--primary-color) 70%);
+    -webkit-background-clip: text;
+}
+[data-theme="light"] nav {
+    background: rgba(244, 245, 247, 0.9);
+}
+[data-theme="light"] .contact-form input, 
+[data-theme="light"] .contact-form textarea,
+[data-theme="light"] .chat-input-area input {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+}
+[data-theme="light"] .system-msg {
+    background: rgba(0, 0, 0, 0.04);
+    color: #000;
 }

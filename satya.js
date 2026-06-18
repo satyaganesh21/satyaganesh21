@@ -500,3 +500,33 @@ function filterProjects(selectedCategory) {
         }
     });
 }
+// ==========================================================================
+// NEW FEATURE ENHANCEMENT: DYNAMIC LIGHT/DARK THEME SWITCHER
+// ==========================================================================
+function toggleTheme() {
+    const rootElement = document.documentElement;
+    const currentTheme = rootElement.getAttribute('data-theme');
+    const themeButtonIcon = document.querySelector('#theme-toggle i');
+    
+    if (currentTheme === 'light') {
+        // Switch to Dark Mode
+        rootElement.removeAttribute('data-theme');
+        themeButtonIcon.className = 'fa-solid fa-moon';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        // Switch to Light Mode
+        rootElement.setAttribute('data-theme', 'light');
+        themeButtonIcon.className = 'fa-solid fa-sun';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Check local storage on page load to remember user's choice
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        const icon = document.querySelector('#theme-toggle i');
+        if (icon) icon.className = 'fa-solid fa-sun';
+    }
+});
