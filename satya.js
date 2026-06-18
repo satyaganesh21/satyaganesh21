@@ -1,78 +1,47 @@
 // ==========================================================================
-// CORE LAYOUT MATRIX RUNTIME PIPELINES (TAB ROUTER VERSION)
+// CORE LAYOUT MATRIX RUNTIME PIPELINES
 // ==========================================================================
 
-// --- New Tab Switching Engine ---
-function showSection(sectionId) {
-    // Hide all sections smoothly
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('active-section');
-    });
-    
-    // Remove active styling from all nav links
-    document.querySelectorAll('.links a').forEach(link => {
-        link.classList.remove('active-link');
-    });
-
-    // Show the targeted section
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active-section');
-        window.scrollTo(0, 0); // Reset scroll position to top of section
-    }
-
-    // Add active highlight to clicked nav link
-    const activeLink = document.querySelector(`.links a[href="#${sectionId}"]`);
-    if (activeLink) {
-        activeLink.classList.add('active-link');
-    }
-}
-
-// Initialize default section on load
-document.addEventListener('DOMContentLoaded', () => {
-    // Show 'home' by default
-    showSection('home');
-
-    // Intercept navbar link clicks for tab behavior
-    document.querySelectorAll('.links a, .nav-btn-link, .buttons button').forEach(element => {
-        element.addEventListener('click', (e) => {
-            const href = element.getAttribute('href') || element.getAttribute('onclick')?.match(/'#(.*?)'/)?.[1];
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const sectionId = href.replace('#', '');
-                showSection(sectionId);
-                document.getElementById('links').classList.remove('show'); // Close mobile menu
-            }
-        });
-    });
-});
-
+// --- 1. Mobile Menu Engine ---
 function toggleMenu() {
     const navLinks = document.getElementById('links');
     navLinks.classList.toggle('show');
 }
 
-// --- Advanced 3D Interactive Mouse-Tilt Mechanism ---
+document.querySelectorAll('.links a').forEach(anchor => {
+    anchor.addEventListener('click', () => {
+        document.getElementById('links').classList.remove('show');
+    });
+});
+
+// --- 2. Advanced 3D Interactive Mouse-Tilt Mechanism ---
 const interactiveCards = document.querySelectorAll('.tilt-card');
+
 interactiveCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const boundingBox = card.getBoundingClientRect();
         const axisX = e.clientX - boundingBox.left;
         const axisY = e.clientY - boundingBox.top;
+        
+        // Calculate coordinate offsets mapped normalized between -10 to 10 degrees
         const tiltX = (boundingBox.height / 2 - axisY) / (boundingBox.height / 2) * 10;
         const tiltY = (axisX - boundingBox.width / 2) / (boundingBox.width / 2) * 10;
+        
         card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-5px)`;
     });
+    
     card.addEventListener('mouseleave', () => {
         card.style.transform = `rotateX(0deg) rotateY(0deg) translateY(0px)`;
     });
 });
 
-// --- Dynamic 3D Floating Particle Background Matrix ---
+// --- 3. Dynamic 3D Floating Particle Background Matrix ---
 const matrixCanvas = document.getElementById('bg-matrix');
 const ctx = matrixCanvas.getContext('2d');
+
 let canvasWidth = matrixCanvas.width = window.innerWidth;
 let canvasHeight = matrixCanvas.height = window.innerHeight;
+
 const pointCluster = [];
 const clusterCap = 65;
 
@@ -84,12 +53,15 @@ class KineticNode {
         this.vectorX = Math.random() * 0.4 - 0.2;
         this.vectorY = Math.random() * 0.4 - 0.2;
     }
+    
     cycle() {
         this.coordX += this.vectorX;
         this.coordY += this.vectorY;
+        
         if (this.coordX < 0 || this.coordX > canvasWidth) this.vectorX *= -1;
         if (this.coordY < 0 || this.coordY > canvasHeight) this.vectorY *= -1;
     }
+    
     render() {
         ctx.beginPath();
         ctx.arc(this.coordX, this.coordY, this.radius, 0, Math.PI * 2);
@@ -98,19 +70,24 @@ class KineticNode {
     }
 }
 
-for (let i = 0; i < clusterCap; i++) pointCluster.push(new KineticNode());
+for (let i = 0; i < clusterCap; i++) {
+    pointCluster.push(new KineticNode());
+}
 
 function backgroundRuntimePipeline() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    
     pointCluster.forEach(node => {
         node.cycle();
         node.render();
     });
+    
     for (let current = 0; current < pointCluster.length; current++) {
         for (let comparison = current + 1; comparison < pointCluster.length; comparison++) {
             const distanceX = pointCluster[current].coordX - pointCluster[comparison].coordX;
             const distanceY = pointCluster[current].coordY - pointCluster[comparison].coordY;
             const separationScalar = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+            
             if (separationScalar < 120) {
                 ctx.beginPath();
                 ctx.moveTo(pointCluster[current].coordX, pointCluster[current].coordY);
@@ -130,7 +107,7 @@ window.addEventListener('resize', () => {
     canvasHeight = matrixCanvas.height = window.innerHeight;
 });
 
-// --- Relational Database Content Engine for Projects ---
+// --- 4. Relational Database Content Engine for Projects ---
 const localProjectRecords = {
     'portfolio': {
         title: "Personal Portfolio Workspace",
@@ -161,9 +138,11 @@ const localProjectRecords = {
 function openProjectModal(keyId) {
     const dataNode = localProjectRecords[keyId];
     if (!dataNode) return;
+    
     document.getElementById('modal-title').innerText = dataNode.title;
     document.getElementById('modal-img').src = dataNode.image;
     document.getElementById('modal-desc').innerText = dataNode.desc;
+    
     const badgeRow = document.getElementById('modal-badges');
     badgeRow.innerHTML = '';
     dataNode.badges.forEach(text => {
@@ -172,6 +151,7 @@ function openProjectModal(keyId) {
         spanNode.innerText = text;
         badgeRow.appendChild(spanNode);
     });
+    
     document.getElementById('modal-live-link').href = dataNode.live;
     document.getElementById('modal-repo-link').href = dataNode.repo;
     document.getElementById('project-modal').classList.add('active');
@@ -184,17 +164,32 @@ function closeProjectModal(event) {
     }
 }
 
+
+// ==========================================================================
+// INTEGRATED AI SUITE CONFIGURATIONS
+// ==========================================================================
+
 // --- FEATURE 4: AI Executive Summary Toggle Logic ---
 const structuralBiographies = {
-    human: `<p class="self-desc dynamic-fade">I'm a highly motivated and detail-oriented computer science student with a deep passion for modern frontend engineering and data insights. As a quick learner, I enjoy tackling architectural challenges, designing intuitive interfaces, and breaking down complex problems. Outside of writing code, I love listening to music, watching movies, and traveling to explore new environments.</p>`,
-    ai: `<ul class="ai-bullet-list dynamic-fade"><li><strong>Technical Track:</strong> Specializing in computer science engineering with deep competencies in frontend architectures and relational data visualization frameworks.</li><li><strong>Core Competency:</strong> Proficient in designing scalable user interfaces with native JavaScript optimization and multi-tiered responsive styling layout structures.</li><li><strong>Operational Strategy:</strong> Strong team collaborator with proven analytical capability, focused on accelerating software performance parameters.</li></ul>`
+    human: `<p class="self-desc dynamic-fade">
+               I'm a highly motivated and detail-oriented computer science student with a deep passion for modern frontend engineering and data insights. As a quick learner, I enjoy tackling architectural challenges, designing intuitive interfaces, and breaking down complex problems. Outside of writing code, I love listening to music, watching movies, and traveling to explore new environments.
+            </p>`,
+    ai: `<ul class="ai-bullet-list dynamic-fade">
+            <li><strong>Technical Track:</strong> Specializing in computer science engineering with deep competencies in frontend architectures and relational data visualization frameworks.</li>
+            <li><strong>Core Competency:</strong> Proficient in designing scalable user interfaces with native JavaScript optimization and multi-tiered responsive styling layout structures.</li>
+            <li><strong>Operational Strategy:</strong> Strong team collaborator with proven analytical capability, focused on accelerating software performance parameters.</li>
+         </ul>`
 };
 
 function toggleBioView() {
     const displayBox = document.getElementById('bio-display-box');
     const toggleSwitch = document.getElementById('ai-bio-switch');
-    if (toggleSwitch.checked) displayBox.innerHTML = structuralBiographies.ai;
-    else displayBox.innerHTML = structuralBiographies.human;
+    
+    if (toggleSwitch.checked) {
+        displayBox.innerHTML = structuralBiographies.ai;
+    } else {
+        displayBox.innerHTML = structuralBiographies.human;
+    }
 }
 
 // --- FEATURE 3: Real-Time Form Sentiment Engine ---
@@ -202,6 +197,7 @@ function analyzeMessageSentiment() {
     const currentText = document.getElementById('contact-msg-input').value.trim();
     const meterBox = document.getElementById('ai-sentiment-meter');
     const meterText = document.getElementById('sentiment-text');
+    
     if (currentText.length < 5) {
         meterBox.style.borderColor = "var(--glass-border)";
         meterBox.style.boxShadow = "none";
@@ -209,10 +205,15 @@ function analyzeMessageSentiment() {
         meterText.style.color = "var(--text-muted)";
         return;
     }
+
     const optimisticTokens = ['hire', 'interview', 'love', 'great', 'awesome', 'good', 'project', 'work', 'opportunity', 'impressed'];
     const lowerText = currentText.toLowerCase();
+    
     let matchCounter = 0;
-    optimisticTokens.forEach(token => { if (lowerText.includes(token)) matchCounter++; });
+    optimisticTokens.forEach(token => {
+        if (lowerText.includes(token)) matchCounter++;
+    });
+
     if (matchCounter > 0) {
         meterBox.style.borderColor = "#00e5ff";
         meterBox.style.boxShadow = "0 0 10px rgba(0, 229, 255, 0.2)";
@@ -230,25 +231,30 @@ function analyzeMessageSentiment() {
 function runAISemanticSearch() {
     const searchVal = document.getElementById('ai-project-search').value.trim().toLowerCase();
     const feedbackTag = document.getElementById('ai-search-feedback');
+    
     const cardPortfolio = document.getElementById('project-card-portfolio');
     const cardData = document.getElementById('project-card-data-analytics');
     const cardEcommerce = document.getElementById('project-card-ecommerce');
     const allCards = [cardPortfolio, cardData, cardEcommerce];
+    
     if (!searchVal) {
         allCards.forEach(card => card.classList.remove('ai-dimmed', 'ai-matched'));
         feedbackTag.innerText = "AI Semantic Engine Idle";
         feedbackTag.style.color = "var(--text-muted)";
         return;
     }
+
     const intentWeights = {
         portfolio: ['portfolio', 'workspace', 'site', 'cv', 'profile', '3d', 'myself', 'resume', 'vanilla'],
         dataAnalytics: ['data', 'analytics', 'tableau', 'python', 'dashboard', 'charts', 'graphs', 'intern', 'predictive', 'process'],
         ecommerce: ['sweetshop', 'shop', 'ecommerce', 'store', 'business', 'local', 'confectionery', 'items', 'menu', 'react']
     };
+
     let matchedKey = null;
     if (intentWeights.portfolio.some(token => searchVal.includes(token))) matchedKey = 'portfolio';
     else if (intentWeights.dataAnalytics.some(token => searchVal.includes(token))) matchedKey = 'dataAnalytics';
     else if (intentWeights.ecommerce.some(token => searchVal.includes(token))) matchedKey = 'ecommerce';
+
     if (matchedKey) {
         allCards.forEach(card => card.classList.add('ai-dimmed'));
         if (matchedKey === 'portfolio') {
@@ -269,10 +275,10 @@ function runAISemanticSearch() {
 
 // --- FEATURE 1: AI Twin Chatbot Conversational Knowledge Base ---
 const aiKnowledgeBase = {
-    skills: "Here is a quick look at my tech stack! 💪\n\n• Frontend: HTML5, CSS3, JavaScript (ES6+), and React.js\n• Data Core: Python scripting & Data Structures (DSA)\n• Analytics: Tableau Desktop for building dynamic dashboards",
-    projects: "I've built a few cool things you can check out right here on my profile! 🚀\n\n1. This Portfolio Workspace\n2. Tableau Analytics Framework\n3. Sweetshop E-Commerce",
-    availability: "I'm actively looking for fresh engineering roles! 💼\n• 📱 Call/WhatsApp: +91 7396737874",
-    default: "Got it! 👍 Try asking me about skills, projects, or availability."
+    skills: "Here is a quick look at my tech stack! 💪\n\n• Frontend: HTML5, CSS3, JavaScript (ES6+), and React.js\n• Data Core: Python scripting & Data Structures (DSA)\n• Analytics: Tableau Desktop for building dynamic dashboards\n\nI love building clean interfaces that connect smoothly with data insights!",
+    projects: "I've built a few cool things you can check out right here on my profile! 🚀\n\n1. This Portfolio Workspace: Built with premium 3D mouse-tilt & glassmorphism layout engines.\n2. Tableau Analytics Framework: Custom pipelines built to handle, clean, and visualize complex data trends.\n3. Sweetshop E-Commerce: A fully responsive digital shop catalog featuring interactive menus for a local confectionery.\n\nWhich one would you like to know more about?",
+    availability: "I'm actively looking for fresh engineering roles, internship paths, and data analytics collaborations! 💼\n\nI am ready to join a team and make an impact. We can connect instantly:\n• 📱 Call/WhatsApp: +91 7396737874\n• 📧 Drop a message in the contact form right below!\n\nLet's build something great together!",
+    default: "Got it! 👍 I'm Satya's AI Twin, built to give you a quick summary of his background.\n\nCould you clarify what you're looking for? Try asking me about:\n• His technical skills stack 🛠️\n• His recent projects 💻\n• His job availability & contact info 📞"
 };
 
 function toggleChatWindow() {
@@ -287,28 +293,34 @@ function sendChatMessage() {
     const displayPanel = document.getElementById('chat-stream-box');
     const currentQuery = queryInput.value.trim();
     if (!currentQuery) return;
+    
     const userBubble = document.createElement('div');
     userBubble.className = "user-msg msg-row";
     userBubble.innerText = currentQuery;
     displayPanel.appendChild(userBubble);
     queryInput.value = '';
     displayPanel.scrollTop = displayPanel.scrollHeight;
+    
     setTimeout(() => {
         const loadBubble = document.createElement('div');
         loadBubble.className = "system-msg msg-row loader-bubble";
         loadBubble.innerText = "AI Twin is formulating reply...";
         displayPanel.appendChild(loadBubble);
         displayPanel.scrollTop = displayPanel.scrollHeight;
+        
         let finalResponse = aiKnowledgeBase.default;
         const normalizedInput = currentQuery.toLowerCase();
-        if (normalizedInput.includes('skill') || normalizedInput.includes('code')) finalResponse = aiKnowledgeBase.skills;
-        else if (normalizedInput.includes('project') || normalizedInput.includes('work')) finalResponse = aiKnowledgeBase.projects;
-        else if (normalizedInput.includes('job') || normalizedInput.includes('hire')) finalResponse = aiKnowledgeBase.availability;
+        
+        if (normalizedInput.includes('skill') || normalizedInput.includes('code') || normalizedInput.includes('language')) finalResponse = aiKnowledgeBase.skills;
+        else if (normalizedInput.includes('project') || normalizedInput.includes('work') || normalizedInput.includes('build')) finalResponse = aiKnowledgeBase.projects;
+        else if (normalizedInput.includes('job') || normalizedInput.includes('hire') || normalizedInput.includes('contact') || normalizedInput.includes('intern')) finalResponse = aiKnowledgeBase.availability;
+        
         setTimeout(() => {
             loadBubble.remove();
             const systemBubble = document.createElement('div');
             systemBubble.className = "system-msg msg-row";
             displayPanel.appendChild(systemBubble);
+            
             let pointerIndex = 0;
             function typeStringRunner() {
                 if (pointerIndex < finalResponse.length) {
@@ -323,11 +335,14 @@ function sendChatMessage() {
     }, 400);
 }
 
+// --- FEATURE: CLICKABLE SMART PORTRAIT HUD DATA TAG CONTROLLER ---
 function showTagMetric(clickedTag) {
     const metadata = clickedTag.getAttribute('data-metric');
     const textContainer = document.getElementById('hud-metric-text');
+    
     document.querySelectorAll('.data-tag').forEach(tag => tag.classList.remove('tag-active'));
     clickedTag.classList.add('tag-active');
+    
     textContainer.style.opacity = '0';
     setTimeout(() => {
         textContainer.innerText = metadata;
@@ -339,6 +354,7 @@ function showTagMetric(clickedTag) {
 document.querySelector('.photo-container.smart-portal').addEventListener('mouseleave', () => {
     const textContainer = document.getElementById('hud-metric-text');
     document.querySelectorAll('.data-tag').forEach(tag => tag.classList.remove('tag-active'));
+    
     textContainer.style.opacity = '0';
     setTimeout(() => {
         textContainer.innerText = "CLICK ON TAGS TO INSPECT BACKGROUND";
@@ -347,18 +363,23 @@ document.querySelector('.photo-container.smart-portal').addEventListener('mousel
     }, 150);
 });
 
+// --- INTERACTIVE 3D NAVIGATION HEADER TEXT TILT LOGIC ---
 function tiltLogoText(event) {
     const logoContainer = event.currentTarget;
     const bounds = logoContainer.getBoundingClientRect();
     const coordinateX = event.clientX - bounds.left;
     const coordinateY = event.clientY - bounds.top;
+    
     const maxTiltRotation = 15;
     const rotationalY = ((coordinateX / bounds.width) - 0.5) * maxTiltRotation;
     const rotationalX = (0.5 - (coordinateY / bounds.height)) * maxTiltRotation;
+    
     logoContainer.style.transform = `rotateX(${rotationalX}deg) rotateY(${rotationalY}deg) scale(1.02)`;
 }
 
 function resetLogoText() {
     const logoContainer = document.querySelector('.interactive-logo-text');
-    if (logoContainer) logoContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+    if (logoContainer) {
+        logoContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+    }
 }
