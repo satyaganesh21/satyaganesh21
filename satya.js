@@ -128,11 +128,11 @@ const localProjectRecords = {
     'ecommerce': {
         title: "Sweetshop & E-Commerce Web Page",
         image: "satya213.jpg",
-        desc: "A beautiful, responsive local sweetshop and confectionery web application built with clean semantic structures, designed specifically to showcase item catalogs with smooth interactive menus.",
+        desc: "A beautiful, fully responsive local sweetshop and confectionery web application designed to showcase product catalogs with smooth interactive menus. Handcrafted using clean semantic HTML5, modern CSS3 layout structures, and core ES6 JavaScript to ensure a fast, mobile-friendly user experience.",
         badges: ["HTML5", "CSS3 Layouts", "JavaScript Core ES6", "Responsive Design"],
         live: "https://satyaganesh21.github.io/sweetshop/",
         repo: "https://github.com/satyaganesh21/sweetshop"
-    }
+    },
 };
 
 function openProjectModal(keyId) {
