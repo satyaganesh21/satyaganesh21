@@ -424,3 +424,79 @@ const scrollSpyObserver = new IntersectionObserver((entries) => {
 
 // Attach observer track parameters to all active page sections
 pageSections.forEach(section => scrollSpyObserver.observe(section));
+// ==========================================================================
+// NEW FEATURE ENHANCEMENTS: TYPING CAROUSEL & PROJECT GRID FILTER ENGINE
+// ==========================================================================
+
+// --- Typing Carousel Engine ---
+const typingPhrases = [
+    "Frontend Developer.",
+    "Data Analytics Enthusiast.",
+    "Problem Solver.",
+    "Quick Learner."
+];
+
+let currentPhraseIndex = 0;
+let currentCharIndex = 0;
+let isErasingPhrase = false;
+const typingSpeedMs = 100;
+const erasingSpeedMs = 50;
+const delayBetweenPhrasesMs = 2000;
+
+function runTypingCarouselPipeline() {
+    const textContainer = document.getElementById('typing-text');
+    if (!textContainer) return;
+    
+    const targetFullPhrase = typingPhrases[currentPhraseIndex];
+    
+    if (!isErasingPhrase) {
+        // Appending characters one by one
+        textContainer.textContent = targetFullPhrase.substring(0, currentCharIndex + 1);
+        currentCharIndex++;
+        
+        if (currentCharIndex === targetFullPhrase.length) {
+            isErasingPhrase = true;
+            setTimeout(runTypingCarouselPipeline, delayBetweenPhrasesMs);
+            return;
+        }
+    } else {
+        // Removing characters one by one
+        textContainer.textContent = targetFullPhrase.substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+        
+        if (currentCharIndex === 0) {
+            isErasingPhrase = false;
+            currentPhraseIndex = (currentPhraseIndex + 1) % typingPhrases.length;
+        }
+    }
+    
+    setTimeout(runTypingCarouselPipeline, isErasingPhrase ? erasingSpeedMs : typingSpeedMs);
+}
+
+// Fire up the typing engine cycle on execution
+document.addEventListener('DOMContentLoaded', runTypingCarouselPipeline);
+
+
+// --- Project Category Filter Tab Logic ---
+function filterProjects(selectedCategory) {
+    // 1. Update active button classes highlight states
+    const allFilterButtons = document.querySelectorAll('.filter-btn');
+    allFilterButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Find clicked button to set active style state
+    const clickedButton = event.currentTarget;
+    if (clickedButton) clickedButton.classList.add('active');
+    
+    // 2. Filter target project card element layouts
+    const allProjectCards = document.querySelectorAll('.project-card');
+    
+    allProjectCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        
+        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+            card.classList.remove('filter-hide');
+        } else {
+            card.classList.add('filter-hide');
+        }
+    });
+}

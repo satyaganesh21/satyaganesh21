@@ -553,4 +553,65 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     width: 100%; height: 2px;
     background: var(--primary-color);
     border-radius: 2px;
+}/* ==========================================================================
+   NEW ADVANCED FEATURES: TYPING CAROUSEL & PROJECT FILTERS
+   ========================================================================== */
+
+/* Typing Terminal Cursor Animation */
+.typing-cursor {
+    color: var(--primary-color);
+    font-weight: bold;
+    animation: cursorBlink 0.8s infinite;
+    margin-left: 2px;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Project Filter Controls Layout */
+.project-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--primary-color);
+    color: #000;
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(252, 166, 31, 0.25);
+}
+
+/* Core transition handler for filtering project elements smoothly */
+.project-card {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease !important;
+}
+
+/* Hides project cards that don't match the clicked tab category filter */
+.project-card.filter-hide {
+    opacity: 0 !important;
+    transform: scale(0.8) translateY(10px) !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
 }

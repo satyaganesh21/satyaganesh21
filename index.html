@@ -64,7 +64,7 @@
             <div class="main-content">
                 <h1>Hi! I am</h1>
                 <span class="glitch-text">Satya Ganesh</span>
-                <p class="tagline">Frontend Developer & Data Analytics Enthusiast</p>
+                <p class="tagline">I am a <span id="typing-text"></span><span class="typing-cursor">|</span></p>
                 <div class="buttons">
     <button class="btn-primary" onclick="location.href='#contact'">Hire Me</button>
     <button class="btn-secondary" onclick="location.href='#projects'">See My Work</button>     
@@ -153,7 +153,11 @@
                  <div id="ai-search-feedback" class="search-feedback-tag">AI Semantic Engine Idle</div>
              </div>
          </div>
-
+<div class="project-filters">
+             <button class="filter-btn active" onclick="filterProjects('all')">All Work</button>
+             <button class="filter-btn" onclick="filterProjects('frontend')">Frontend Dev</button>
+             <button class="filter-btn" onclick="filterProjects('analytics')">Data Analytics</button>
+         </div>
          <div class="projects-grid">
              <div class="project-card tilt-card" id="project-card-portfolio" onclick="openProjectModal('portfolio')">
                  <div class="img-wrapper"><img src="satya21.jpg" alt="Personal Portfolio"></div>
