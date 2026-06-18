@@ -454,3 +454,33 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 @media (max-width: 480px) {
     .chat-window-layout { width: calc(100vw - 40px); right: -10px; }
 }
+/* ==========================================================================
+   ROUTER TAB SPA DISPLAY MODIFICATIONS
+   ========================================================================== */
+
+/* Hide all sections by default */
+section {
+    display: none !important;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Show only the active chosen section */
+section.active-section {
+    display: flex !important;
+    opacity: 1;
+    animation: fadeInSection 0.4s ease forwards;
+}
+
+/* Smooth fade animation when switching views */
+@keyframes fadeInSection {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Keep active section header styled cleanly */
+.links a.active-link {
+    color: var(--primary-color) !important;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 4px;
+}
