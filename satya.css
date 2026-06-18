@@ -614,32 +614,58 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
-}/* ==========================================================================
-   NEW ADVANCED FEATURE: LIGHT & DARK THEME ENGINE
+}
+/* ==========================================================================
+   UPDATED ADVANCED FEATURE: OPTION 1 - CLEAN TECH MINIMAL LIGHT THEME
    ========================================================================== */
 [data-theme="light"] {
-    --bg-dark: #f4f5f7;
-    --text-light: #1a1a1e;
-    --text-muted: #55555a;
-    --glass-bg: rgba(240, 242, 245, 0.9);
-    --glass-border: rgba(0, 0, 0, 0.08);
+    --bg-dark: #f8fafc;        /* Fresh slate white background */
+    --text-light: #0f172a;     /* Deep navy text (highly readable) */
+    --text-muted: #64748b;     /* Soft slate text for descriptions */
+    --glass-bg: rgba(255, 255, 255, 0.75); /* Clean white card base */
+    --glass-border: rgba(15, 23, 42, 0.08); /* Crisp subtle card borders */
 }
 
 /* Light mode overrides for special components */
 [data-theme="light"] .logo-text span {
-    background: linear-gradient(135deg, #000 30%, var(--primary-color) 70%);
+    background: linear-gradient(135deg, #0f172a 30%, var(--primary-color) 70%);
     -webkit-background-clip: text;
 }
+
 [data-theme="light"] nav {
-    background: rgba(244, 245, 247, 0.9);
+    background: rgba(248, 250, 252, 0.9);
 }
+
 [data-theme="light"] .contact-form input, 
 [data-theme="light"] .contact-form textarea,
 [data-theme="light"] .chat-input-area input {
-    background: rgba(255, 255, 255, 0.8);
-    color: #000;
+    background: #ffffff;
+    color: #0f172a;
+    border: 1px solid rgba(15, 23, 42, 0.1);
 }
+
+[data-theme="light"] .contact-form input:focus, 
+[data-theme="light"] .contact-form textarea:focus,
+[data-theme="light"] .chat-input-area input:focus {
+    border-color: var(--primary-color);
+}
+
 [data-theme="light"] .system-msg {
-    background: rgba(0, 0, 0, 0.04);
-    color: #000;
+    background: #edf2f7;
+    color: #0f172a;
+    border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .modal-content {
+    background: #ffffff !important;
+}
+
+[data-theme="light"] .close-chat,
+[data-theme="light"] .modal-close {
+    color: #64748b;
+}
+
+[data-theme="light"] .close-chat:hover,
+[data-theme="light"] .modal-close:hover {
+    color: var(--primary-color);
 }
