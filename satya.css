@@ -457,4 +457,30 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 
 @media (max-width: 480px) {
     .chat-window-layout { width: calc(100vw - 40px); right: -10px; }
+}/* ==========================================================================
+   RESUME BUTTON ALIGNMENT FIX
+   ========================================================================== */
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Ensures buttons stack cleanly on mobile screens */
+}
+
+.btn-resume-link {
+    text-decoration: none;
+}
+
+.cv-btn {
+    border-color: rgba(252, 166, 31, 0.4);
+    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Adds space between the download icon and the text */
+    transition: all 0.3s ease;
+}
+
+.cv-btn:hover {
+    background: rgba(252, 166, 31, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(252, 166, 31, 0.15);
 }
