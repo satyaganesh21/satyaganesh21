@@ -34,7 +34,7 @@ interactiveCards.forEach(card => {
     });
 });
 
-// --- 3. Dynamic 3D Floating Particle Background Matrix (Option 5: Tech Blue Curves) ---
+// --- 3. Dynamic 3D Floating Particle Background Matrix (Option 5: Adelina Warm Earth Curves) ---
 const matrixCanvas = document.getElementById('bg-matrix');
 const ctx = matrixCanvas.getContext('2d');
 
@@ -85,10 +85,10 @@ class KineticNode {
             this.coordY, 
             this.radius
         );
-        // Tech Blue Shaded 3D Orbs (Sky Blue Core with Electric Blue outer shells)
-        gradient3D.addColorStop(0, 'rgba(56, 189, 248, 0.9)');   
-        gradient3D.addColorStop(0.5, 'rgba(0, 112, 243, 0.35)'); 
-        gradient3D.addColorStop(1, 'rgba(0, 112, 243, 0.01)');
+        // Adelina Editorial Orbs (Amber center radiating outward into Terracotta)
+        gradient3D.addColorStop(0, 'rgba(232, 168, 85, 0.85)');   
+        gradient3D.addColorStop(0.5, 'rgba(217, 107, 67, 0.25)'); 
+        gradient3D.addColorStop(1, 'rgba(217, 107, 67, 0.01)');
         
         ctx.arc(this.coordX, this.coordY, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = gradient3D;
@@ -118,7 +118,7 @@ function backgroundRuntimePipeline() {
         node.render();
     });
     
-    // Magnetic Attraction Curves rendering with Cyber Tech Blue tracks
+    // Magnetic Attraction Curves rendering with Terracotta profiles
     for (let current = 0; current < pointCluster.length; current++) {
         for (let comparison = current + 1; comparison < pointCluster.length; comparison++) {
             const p1 = pointCluster[current];
@@ -140,7 +140,7 @@ function backgroundRuntimePipeline() {
                 ctx.moveTo(p1.coordX, p1.coordY);
                 ctx.quadraticCurveTo(controlX, controlY, p2.coordX, p2.coordY);
                 
-                ctx.strokeStyle = `rgba(0, 112, 243, ${0.22 * (1 - separationScalar / 170)})`;
+                ctx.strokeStyle = `rgba(217, 107, 67, ${0.18 * (1 - separationScalar / 170)})`;
                 ctx.lineWidth = 0.6;
                 ctx.stroke();
             }
@@ -262,14 +262,13 @@ function analyzeMessageSentiment() {
     });
 
     if (matchCounter > 0) {
-        // Updated from purple to clear tech blue validation styles
         meterBox.style.borderColor = "var(--accent-cyan)";
-        meterBox.style.boxShadow = "0 0 10px rgba(56, 189, 248, 0.3)";
+        meterBox.style.boxShadow = "0 4px 10px rgba(232, 168, 85, 0.15)";
         meterText.innerText = "🌟 Highly Positive Intent";
         meterText.style.color = "var(--accent-cyan)";
     } else {
         meterBox.style.borderColor = "var(--primary-color)";
-        meterBox.style.boxShadow = "0 0 10px rgba(0, 112, 243, 0.3)";
+        meterBox.style.boxShadow = "0 4px 10px rgba(217, 107, 67, 0.15)";
         meterText.innerText = "💼 Professional / Neutral";
         meterText.style.color = "var(--primary-color)";
     }
@@ -307,17 +306,17 @@ function runAISemanticSearch() {
         allCards.forEach(card => card.classList.add('ai-dimmed'));
         if (matchedKey === 'portfolio') {
             cardPortfolio.classList.remove('ai-dimmed'); cardPortfolio.classList.add('ai-matched');
-            feedbackTag.innerText = "✨ Matched Developer Profile"; feedbackTag.style.color = "var(--accent-cyan)";
+            feedbackTag.innerText = "✨ Matched Developer Profile"; feedbackTag.style.color = "var(--primary-color)";
         } else if (matchedKey === 'dataAnalytics') {
             cardData.classList.remove('ai-dimmed'); cardData.classList.add('ai-matched');
-            feedbackTag.innerText = "📊 Matched Analytics Platform"; feedbackTag.style.color = "var(--accent-cyan)";
+            feedbackTag.innerText = "📊 Matched Analytics Platform"; feedbackTag.style.color = "var(--primary-color)";
         } else if (matchedKey === 'ecommerce') {
             cardEcommerce.classList.remove('ai-dimmed'); cardEcommerce.classList.add('ai-matched');
-            feedbackTag.innerText = "🛍️ Matched E-Commerce System"; feedbackTag.style.color = "var(--accent-cyan)";
+            feedbackTag.innerText = "🛍️ Matched E-Commerce System"; feedbackTag.style.color = "var(--primary-color)";
         }
     } else {
         allCards.forEach(card => { card.classList.add('ai-dimmed'); card.classList.remove('ai-matched'); });
-        feedbackTag.innerText = "🤖 Processing Intent..."; feedbackTag.style.color = "var(--primary-color)";
+        feedbackTag.innerText = "🤖 Processing Intent..."; feedbackTag.style.color = "var(--accent-cyan)";
     }
 }
 
@@ -394,7 +393,7 @@ function showTagMetric(clickedTag) {
     textContainer.style.opacity = '0';
     setTimeout(() => {
         textContainer.innerText = metadata;
-        textContainer.style.color = 'var(--accent-cyan)';
+        textContainer.style.color = 'var(--primary-color)';
         textContainer.style.opacity = '1';
     }, 150);
 }
@@ -406,7 +405,7 @@ document.querySelector('.photo-container.smart-portal').addEventListener('mousel
     textContainer.style.opacity = '0';
     setTimeout(() => {
         textContainer.innerText = "CLICK ON TAGS TO INSPECT BACKGROUND";
-        textContainer.style.color = '#fff';
+        textContainer.style.color = 'var(--text-light)';
         textContainer.style.opacity = '1';
     }, 150);
 });
