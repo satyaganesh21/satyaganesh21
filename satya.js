@@ -35,7 +35,7 @@ interactiveCards.forEach(card => {
     });
 });
 
-// --- 3. Dynamic 3D Floating Particle Background Matrix ---
+// --- 3. Dynamic 3D Floating Particle Background Matrix (Option 5: Magnetic Field Lines) ---
 const matrixCanvas = document.getElementById('bg-matrix');
 const ctx = matrixCanvas.getContext('2d');
 
@@ -43,13 +43,15 @@ let canvasWidth = matrixCanvas.width = window.innerWidth;
 let canvasHeight = matrixCanvas.height = window.innerHeight;
 
 const pointCluster = [];
-const clusterCap = 65;
+const clusterCap = 45; // Slightly lower count to keep rendering smooth with complex math arcs
+let mouseTrackingVector = { x: null, y: null, radius: 200 };
 
 class KineticNode {
     constructor() {
         this.coordX = Math.random() * canvasWidth;
         this.coordY = Math.random() * canvasHeight;
-        this.radius = Math.random() * 2 + 0.5;
+        this.radius = Math.random() * 6 + 4; // Distinct sphere size
+        this.baseRadius = this.radius;
         this.vectorX = Math.random() * 0.4 - 0.2;
         this.vectorY = Math.random() * 0.4 - 0.2;
     }
@@ -60,12 +62,37 @@ class KineticNode {
         
         if (this.coordX < 0 || this.coordX > canvasWidth) this.vectorX *= -1;
         if (this.coordY < 0 || this.coordY > canvasHeight) this.vectorY *= -1;
+
+        // Smooth growth near mouse cursor
+        if (mouseTrackingVector.x !== null && mouseTrackingVector.y !== null) {
+            let dx = mouseTrackingVector.x - this.coordX;
+            let dy = mouseTrackingVector.y - this.coordY;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < mouseTrackingVector.radius) {
+                if (this.radius < this.baseRadius * 2) this.radius += 0.3;
+            } else if (this.radius > this.baseRadius) {
+                this.radius -= 0.1;
+            }
+        }
     }
     
     render() {
         ctx.beginPath();
+        let gradient3D = ctx.createRadialGradient(
+            this.coordX - this.radius * 0.3, 
+            this.coordY - this.radius * 0.3, 
+            this.radius * 0.1, 
+            this.coordX, 
+            this.coordY, 
+            this.radius
+        );
+        gradient3D.addColorStop(0, 'rgba(252, 166, 31, 0.8)');
+        gradient3D.addColorStop(0.4, 'rgba(252, 166, 31, 0.25)');
+        gradient3D.addColorStop(1, 'rgba(252, 166, 31, 0.01)');
+        
         ctx.arc(this.coordX, this.coordY, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(252, 166, 31, 0.25)';
+        ctx.fillStyle = gradient3D;
         ctx.fill();
     }
 }
@@ -73,6 +100,16 @@ class KineticNode {
 for (let i = 0; i < clusterCap; i++) {
     pointCluster.push(new KineticNode());
 }
+
+window.addEventListener('mousemove', (e) => {
+    mouseTrackingVector.x = e.clientX;
+    mouseTrackingVector.y = e.clientY;
+});
+
+window.addEventListener('mouseleave', () => {
+    mouseTrackingVector.x = null;
+    mouseTrackingVector.y = null;
+});
 
 function backgroundRuntimePipeline() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -82,18 +119,33 @@ function backgroundRuntimePipeline() {
         node.render();
     });
     
+    // Calculate and draw curved Magnetic Field Lines between nodes
     for (let current = 0; current < pointCluster.length; current++) {
         for (let comparison = current + 1; comparison < pointCluster.length; comparison++) {
-            const distanceX = pointCluster[current].coordX - pointCluster[comparison].coordX;
-            const distanceY = pointCluster[current].coordY - pointCluster[comparison].coordY;
+            const p1 = pointCluster[current];
+            const p2 = pointCluster[comparison];
+            
+            const distanceX = p1.coordX - p2.coordX;
+            const distanceY = p1.coordY - p2.coordY;
             const separationScalar = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
             
-            if (separationScalar < 120) {
+            if (separationScalar < 160) {
                 ctx.beginPath();
-                ctx.moveTo(pointCluster[current].coordX, pointCluster[current].coordY);
-                ctx.lineTo(pointCluster[comparison].coordX, pointCluster[comparison].coordY);
-                ctx.strokeStyle = `rgba(252, 166, 31, ${0.15 * (1 - separationScalar / 120)})`;
-                ctx.lineWidth = 0.8;
+                
+                // Calculate a perpendicular offset point to create the beautiful curved arc
+                const midX = (p1.coordX + p2.coordX) / 2;
+                const midY = (p1.coordY + p2.coordY) / 2;
+                
+                // Creates a slight wave effect based on position
+                const curvatureIntensity = 25 * (1 - separationScalar / 160);
+                const controlX = midX + (p2.coordY - p1.coordY) * (curvatureIntensity / separationScalar);
+                const controlY = midY - (p2.coordX - p1.coordX) * (curvatureIntensity / separationScalar);
+                
+                ctx.moveTo(p1.coordX, p1.coordY);
+                ctx.quadraticCurveTo(controlX, controlY, p2.coordX, p2.coordY);
+                
+                ctx.strokeStyle = `rgba(252, 166, 31, ${0.15 * (1 - separationScalar / 160)})`;
+                ctx.lineWidth = 0.6;
                 ctx.stroke();
             }
         }
