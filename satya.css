@@ -187,9 +187,10 @@ nav {
 }
 
 /* Unique Smart Tag Portal Layering */
+/* Unique Smart Tag Portal Sizing Alignment */
 .photo-container.smart-portal {
-    width: 380px;
-    height: 380px;
+    width: 420px;  
+    height: 420px; 
     flex-shrink: 0;
     border-radius: 32px;
     position: relative;
