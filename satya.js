@@ -23,7 +23,6 @@ interactiveCards.forEach(card => {
         const axisX = e.clientX - boundingBox.left;
         const axisY = e.clientY - boundingBox.top;
         
-        // Calculate coordinate offsets mapped normalized between -10 to 10 degrees
         const tiltX = (boundingBox.height / 2 - axisY) / (boundingBox.height / 2) * 10;
         const tiltY = (axisX - boundingBox.width / 2) / (boundingBox.width / 2) * 10;
         
@@ -35,7 +34,7 @@ interactiveCards.forEach(card => {
     });
 });
 
-// --- 3. Dynamic 3D Floating Particle Background Matrix (Option 5: Magnetic Field Lines) ---
+// --- 3. Dynamic 3D Floating Particle Background Matrix (Option 5: Cyber Neon Curves) ---
 const matrixCanvas = document.getElementById('bg-matrix');
 const ctx = matrixCanvas.getContext('2d');
 
@@ -43,14 +42,14 @@ let canvasWidth = matrixCanvas.width = window.innerWidth;
 let canvasHeight = matrixCanvas.height = window.innerHeight;
 
 const pointCluster = [];
-const clusterCap = 45; // Slightly lower count to keep rendering smooth with complex math arcs
+const clusterCap = 45;
 let mouseTrackingVector = { x: null, y: null, radius: 200 };
 
 class KineticNode {
     constructor() {
         this.coordX = Math.random() * canvasWidth;
         this.coordY = Math.random() * canvasHeight;
-        this.radius = Math.random() * 6 + 4; // Distinct sphere size
+        this.radius = Math.random() * 6 + 4;
         this.baseRadius = this.radius;
         this.vectorX = Math.random() * 0.4 - 0.2;
         this.vectorY = Math.random() * 0.4 - 0.2;
@@ -63,7 +62,6 @@ class KineticNode {
         if (this.coordX < 0 || this.coordX > canvasWidth) this.vectorX *= -1;
         if (this.coordY < 0 || this.coordY > canvasHeight) this.vectorY *= -1;
 
-        // Smooth growth near mouse cursor
         if (mouseTrackingVector.x !== null && mouseTrackingVector.y !== null) {
             let dx = mouseTrackingVector.x - this.coordX;
             let dy = mouseTrackingVector.y - this.coordY;
@@ -87,9 +85,10 @@ class KineticNode {
             this.coordY, 
             this.radius
         );
-        gradient3D.addColorStop(0, 'rgba(252, 166, 31, 0.8)');
-        gradient3D.addColorStop(0.4, 'rgba(252, 166, 31, 0.25)');
-        gradient3D.addColorStop(1, 'rgba(252, 166, 31, 0.01)');
+        // Cyber Shaded 3D Orbs (Cyan Core with Purple outer shells)
+        gradient3D.addColorStop(0, 'rgba(0, 229, 255, 0.85)');   
+        gradient3D.addColorStop(0.5, 'rgba(168, 85, 247, 0.3)'); 
+        gradient3D.addColorStop(1, 'rgba(168, 85, 247, 0.01)');
         
         ctx.arc(this.coordX, this.coordY, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = gradient3D;
@@ -119,7 +118,7 @@ function backgroundRuntimePipeline() {
         node.render();
     });
     
-    // Calculate and draw curved Magnetic Field Lines between nodes
+    // Magnetic Curves rendering with Cyber Neon Purple styles
     for (let current = 0; current < pointCluster.length; current++) {
         for (let comparison = current + 1; comparison < pointCluster.length; comparison++) {
             const p1 = pointCluster[current];
@@ -129,22 +128,19 @@ function backgroundRuntimePipeline() {
             const distanceY = p1.coordY - p2.coordY;
             const separationScalar = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
             
-            if (separationScalar < 160) {
+            if (separationScalar < 170) {
                 ctx.beginPath();
-                
-                // Calculate a perpendicular offset point to create the beautiful curved arc
                 const midX = (p1.coordX + p2.coordX) / 2;
                 const midY = (p1.coordY + p2.coordY) / 2;
                 
-                // Creates a slight wave effect based on position
-                const curvatureIntensity = 25 * (1 - separationScalar / 160);
+                const curvatureIntensity = 30 * (1 - separationScalar / 170);
                 const controlX = midX + (p2.coordY - p1.coordY) * (curvatureIntensity / separationScalar);
                 const controlY = midY - (p2.coordX - p1.coordX) * (curvatureIntensity / separationScalar);
                 
                 ctx.moveTo(p1.coordX, p1.coordY);
                 ctx.quadraticCurveTo(controlX, controlY, p2.coordX, p2.coordY);
                 
-                ctx.strokeStyle = `rgba(252, 166, 31, ${0.15 * (1 - separationScalar / 160)})`;
+                ctx.strokeStyle = `rgba(168, 85, 247, ${0.25 * (1 - separationScalar / 170)})`;
                 ctx.lineWidth = 0.6;
                 ctx.stroke();
             }
@@ -172,8 +168,8 @@ const localProjectRecords = {
     'data-analytics': {
         title: "Data Analytics & Tableau Ecosystem",
         image: "satya212.png",
-        desc: "Advanced data parsing architectures built to filter complicated data flows, clean database profiles, and present beautiful predictive analytical graphs via software platform connections. Inspired by enterprise analytics frameworks.",
-        badges: ["Tableau Desktop", "Data Analysis", "Python Scripting", "Process Management"],
+        desc: "Advanced data intelligence framework developed during my APSCHE Data Analytics virtual internship to analyze, clean, and visualize complex industrial trends. This ecosystem converts raw business data into actionable strategic insights through automated processing and interactive visual discovery.\n\n📊 Core Project Milestones:\n• Data Preprocessing: Utilized Python data structures and analytical scripting to clean messy source datasets, handle missing values, and parse complex database profiles.\n• Enterprise Dashboarding: Designed and deployed multi-tiered business intelligence views in Tableau Desktop to track live high-level performance metrics and trends.\n• Statistical Insights: Implemented behavioral segment filtering and forecasting models to optimize organizational data flows and platform connections.",
+        badges: ["Tableau Desktop", "Data Analysis", "Python Scripting", "Data Structures (DSA)"],
         live: "https://github.com/satyaganesh21/satyaganesh2121",
         repo: "https://github.com/satyaganesh21/satyaganesh2121"
     },
@@ -215,7 +211,6 @@ function closeProjectModal(event) {
         targetOverlay.classList.remove('active');
     }
 }
-
 
 // ==========================================================================
 // INTEGRATED AI SUITE CONFIGURATIONS
@@ -267,13 +262,13 @@ function analyzeMessageSentiment() {
     });
 
     if (matchCounter > 0) {
-        meterBox.style.borderColor = "#00e5ff";
+        meterBox.style.borderColor = "var(--accent-cyan)";
         meterBox.style.boxShadow = "0 0 10px rgba(0, 229, 255, 0.2)";
         meterText.innerText = "🌟 Highly Positive Intent";
-        meterText.style.color = "#00e5ff";
+        meterText.style.color = "var(--accent-cyan)";
     } else {
         meterBox.style.borderColor = "var(--primary-color)";
-        meterBox.style.boxShadow = "0 0 10px rgba(252, 166, 31, 0.2)";
+        meterBox.style.boxShadow = "0 0 10px rgba(168, 85, 247, 0.2)";
         meterText.innerText = "💼 Professional / Neutral";
         meterText.style.color = "var(--primary-color)";
     }
@@ -311,13 +306,13 @@ function runAISemanticSearch() {
         allCards.forEach(card => card.classList.add('ai-dimmed'));
         if (matchedKey === 'portfolio') {
             cardPortfolio.classList.remove('ai-dimmed'); cardPortfolio.classList.add('ai-matched');
-            feedbackTag.innerText = "✨ Matched Developer Profile"; feedbackTag.style.color = "#00e5ff";
+            feedbackTag.innerText = "✨ Matched Developer Profile"; feedbackTag.style.color = "var(--accent-cyan)";
         } else if (matchedKey === 'dataAnalytics') {
             cardData.classList.remove('ai-dimmed'); cardData.classList.add('ai-matched');
-            feedbackTag.innerText = "📊 Matched Analytics Platform"; feedbackTag.style.color = "#00e5ff";
+            feedbackTag.innerText = "📊 Matched Analytics Platform"; feedbackTag.style.color = "var(--accent-cyan)";
         } else if (matchedKey === 'ecommerce') {
             cardEcommerce.classList.remove('ai-dimmed'); cardEcommerce.classList.add('ai-matched');
-            feedbackTag.innerText = "🛍️ Matched E-Commerce System"; feedbackTag.style.color = "#00e5ff";
+            feedbackTag.innerText = "🛍️ Matched E-Commerce System"; feedbackTag.style.color = "var(--accent-cyan)";
         }
     } else {
         allCards.forEach(card => { card.classList.add('ai-dimmed'); card.classList.remove('ai-matched'); });
@@ -398,7 +393,7 @@ function showTagMetric(clickedTag) {
     textContainer.style.opacity = '0';
     setTimeout(() => {
         textContainer.innerText = metadata;
-        textContainer.style.color = '#fca61f';
+        textContainer.style.color = 'var(--accent-cyan)';
         textContainer.style.opacity = '1';
     }, 150);
 }
@@ -440,7 +435,6 @@ function resetLogoText() {
 // NEW FEATURE ENHANCEMENTS: PAGE LOADER & NAV SCROLL SPY
 // ==========================================================================
 
-// --- Loader System Run Logic ---
 window.addEventListener('load', () => {
     const preloader = document.getElementById('page-loader');
     if (preloader) {
@@ -450,7 +444,6 @@ window.addEventListener('load', () => {
     }
 });
 
-// --- Active Link Scroll Spy Loop Logic ---
 const pageSections = document.querySelectorAll('section');
 const menuNavigationLinks = document.querySelectorAll('.links a');
 
@@ -481,7 +474,6 @@ pageSections.forEach(section => scrollSpyObserver.observe(section));
 // NEW FEATURE ENHANCEMENTS: TYPING CAROUSEL & PROJECT GRID FILTER ENGINE
 // ==========================================================================
 
-// --- Typing Carousel Engine ---
 const typingPhrases = [
     "Frontend Developer.",
     "Data Analytics Enthusiast.",
@@ -526,12 +518,10 @@ function runTypingCarouselPipeline() {
 
 document.addEventListener('DOMContentLoaded', runTypingCarouselPipeline);
 
-// --- Project Category Filter Tab Logic ---
 function filterProjects(selectedCategory) {
     const allFilterButtons = document.querySelectorAll('.filter-btn');
     allFilterButtons.forEach(btn => btn.classList.remove('active'));
     
-    // Fixed: Correctly reading event parameters dynamically
     if (window.event && window.event.currentTarget) {
         window.event.currentTarget.classList.add('active');
     }
