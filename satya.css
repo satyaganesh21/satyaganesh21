@@ -258,7 +258,7 @@ nav {
     z-index: 5; transition: all 0.4s ease;
 }
 
-.photo-container.smart-portal:hover .hud-display-box { opacity: 1; transform: translateX(-50%) translateY(0); }
+.photo-container.smart-portal:hover .hud-display-box { opacity: 1; transform: translateX(-50%, -50%) scale(0); }
 
 #hud-metric-text {
     font-size: 0.85rem; font-weight: 700; color: #fff;
@@ -364,9 +364,30 @@ nav {
 .img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .project-card:hover .img-wrapper img { transform: scale(1.08); }
 .card-meta { padding: 25px; }
-.card-meta h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--text-light); }
-.card-meta p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px; }
-.view-more-tag { font-size: 0.85rem; color: var(--primary-color); font-weight: 600; }
+
+/* Premium Layout Grid Typography Specifications */
+.card-meta h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+    color: var(--text-light);
+}
+.card-meta p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.view-more-tag {
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+.project-card:hover .view-more-tag { color: var(--primary-color); }
 
 .project-card.ai-dimmed { opacity: 0.25; transform: scale(0.95); pointer-events: none; }
 .project-card.ai-matched { opacity: 1; transform: scale(1.03); border-color: #00e5ff !important; box-shadow: 0 15px 30px rgba(0, 229, 255, 0.15) !important; }
@@ -463,17 +484,13 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 
 /* ==========================================================================
    RESUME BUTTON ALIGNMENT FIX
-   ========================================================================== */
+   ========================================================================= */
 .buttons {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
 }
-
-.btn-resume-link {
-    text-decoration: none;
-}
-
+.btn-resume-link { text-decoration: none; }
 .cv-btn {
     border-color: rgba(168, 85, 247, 0.4);
     color: var(--primary-color);
@@ -482,7 +499,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     gap: 8px;
     transition: all 0.3s ease;
 }
-
 .cv-btn:hover {
     background: rgba(168, 85, 247, 0.1);
     border-color: var(--accent-cyan);
@@ -493,7 +509,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 /* ==========================================================================
    NEW ADVANCED FEATURES: LOADER & SCROLL SPY STYLES
    ========================================================================== */
-
 #page-loader {
     position: fixed;
     top: 0; left: 0;
@@ -505,19 +520,16 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     justify-content: center;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
-
 #page-loader.fade-out {
     opacity: 0;
     visibility: hidden;
 }
-
 .loader-content {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .loader-circle {
     width: 90px;
     height: 90px;
@@ -527,7 +539,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     animation: loaderSpin 1s linear infinite;
     box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
 }
-
 .loader-logo {
     position: absolute;
     font-size: 1.4rem;
@@ -536,7 +547,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     letter-spacing: 1px;
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
 }
-
 @keyframes loaderSpin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -547,7 +557,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
     position: relative;
 }
-
 .links a.active::after {
     content: '';
     position: absolute;
@@ -560,14 +569,12 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 /* ==========================================================================
    NEW ADVANCED FEATURES: TYPING CAROUSEL & PROJECT FILTERS
    ========================================================================== */
-
 .typing-cursor {
     color: var(--accent-cyan);
     font-weight: bold;
     animation: cursorBlink 0.8s infinite;
     margin-left: 2px;
 }
-
 @keyframes cursorBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
@@ -579,7 +586,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     margin-bottom: 30px;
     flex-wrap: wrap;
 }
-
 .filter-btn {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--glass-border);
@@ -591,7 +597,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     font-weight: 600;
     transition: all 0.3s ease;
 }
-
 .filter-btn:hover, .filter-btn.active {
     background: var(--primary-color);
     color: #fff;
@@ -602,7 +607,6 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 .project-card {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease !important;
 }
-
 .project-card.filter-hide {
     opacity: 0 !important;
     transform: scale(0.8) translateY(10px) !important;
@@ -626,16 +630,11 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     --glass-bg: rgba(255, 255, 255, 0.75); 
     --glass-border: rgba(15, 23, 42, 0.08); 
 }
-
 [data-theme="light"] .logo-text span {
     background: linear-gradient(135deg, #0f172a 30%, var(--primary-color) 70%);
     -webkit-background-clip: text;
 }
-
-[data-theme="light"] nav {
-    background: rgba(248, 250, 252, 0.9);
-}
-
+[data-theme="light"] nav { background: rgba(248, 250, 252, 0.9); }
 [data-theme="light"] .contact-form input, 
 [data-theme="light"] .contact-form textarea,
 [data-theme="light"] .chat-input-area input {
@@ -643,56 +642,36 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     color: #0f172a;
     border: 1px solid rgba(15, 23, 42, 0.1);
 }
-
 [data-theme="light"] .contact-form input:focus, 
 [data-theme="light"] .contact-form textarea:focus,
 [data-theme="light"] .chat-input-area input:focus {
     border-color: var(--primary-color);
 }
-
 [data-theme="light"] .system-msg {
     background: #edf2f7;
     color: #0f172a;
     border: 1px solid rgba(15, 23, 42, 0.05);
 }
-
-[data-theme="light"] .modal-content {
-    background: #ffffff !important;
-}
-
+[data-theme="light"] .modal-content { background: #ffffff !important; }
 [data-theme="light"] .close-chat,
-[data-theme="light"] .modal-close {
-    color: #64748b;
-}
-
+[data-theme="light"] .modal-close { color: #64748b; }
 [data-theme="light"] .close-chat:hover,
-[data-theme="light"] .modal-close:hover {
-    color: var(--primary-color);
-}
+[data-theme="light"] .modal-close:hover { color: var(--primary-color); }
 
 /* ==========================================================================
    ADVANCED 3D PARALLAX DEPTH LAYERING EFFECT
    ========================================================================== */
-
 .project-card .card-meta {
     transform: translateZ(40px);
     transform-style: preserve-3d;
     transition: transform 0.1s ease;
 }
-
-.project-card h3 {
-    transform: translateZ(30px);
-}
-
-.project-card p {
-    transform: translateZ(15px);
-}
-
+.project-card h3 { transform: translateZ(30px); }
+.project-card p { transform: translateZ(15px); }
 .project-card .view-more-tag {
     display: inline-block;
     transform: translateZ(25px);
 }
-
 .project-card .img-wrapper {
     transform: translateZ(10px);
     border-radius: 12px;
