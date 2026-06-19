@@ -297,6 +297,13 @@ function tiltLogoText(event) {
     logoContainer.style.transform = `rotateX(${rotationalX}deg) rotateY(${rotationalY}deg) scale(1.02)`;
 }
 
+// FIX: Added missing function to handle onmouseleave logo reset safely
+function resetLogoText() {
+    const logoContainer = document.querySelector('.interactive-logo-text');
+    if (logoContainer) {
+        logoContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+    }
+}
 window.addEventListener('load', () => {
     const preloader = document.getElementById('page-loader');
     if (preloader) {
