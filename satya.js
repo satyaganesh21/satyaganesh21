@@ -140,12 +140,12 @@ function analyzeMessageSentiment() {
 
     if (matchCounter > 0) {
         meterBox.style.borderColor = "var(--accent-cyan)";
-        meterBox.style.boxShadow = "0 0 10px rgba(56, 189, 248, 0.3)";
+        meterBox.style.boxShadow = "0 0 10px rgba(234, 179, 8, 0.3)";
         meterText.innerText = "🌟 Highly Positive Intent";
         meterText.style.color = "var(--accent-cyan)";
     } else {
         meterBox.style.borderColor = "var(--primary-color)";
-        meterBox.style.boxShadow = "0 0 10px rgba(0, 112, 243, 0.3)";
+        meterBox.style.boxShadow = "0 0 10px rgba(252, 166, 31, 0.3)";
         meterText.innerText = "💼 Professional / Neutral";
         meterText.style.color = "var(--primary-color)";
     }
@@ -267,7 +267,7 @@ function showTagMetric(clickedTag) {
     textContainer.style.opacity = '0';
     setTimeout(() => {
         textContainer.innerText = metadata;
-        textContainer.style.color = 'var(--accent-cyan)';
+        textContainer.style.color = 'var(--primary-color)';
         textContainer.style.opacity = '1';
     }, 150);
 }
