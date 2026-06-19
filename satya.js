@@ -2,15 +2,32 @@
 // CORE LAYOUT MATRIX RUNTIME PIPELINES
 // ==========================================================================
 
-// --- 1. Mobile Menu Engine ---
+// --- 1. Mobile Menu Engine & Smooth Anchor Routing ---
 function toggleMenu() {
     const navLinks = document.getElementById('links');
     navLinks.classList.toggle('show');
 }
 
+// Click listener to handle navigation state and drop menu responsiveness smoothly
 document.querySelectorAll('.links a').forEach(anchor => {
-    anchor.addEventListener('click', () => {
+    anchor.addEventListener('click', function(e) {
+        // Prevent instant jump to allow custom positioning if needed, then collapse menu
         document.getElementById('links').classList.remove('show');
+        
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            e.preventDefault();
+            const headerOffset = 80; // Protects titles from being hidden under fixed nav bar
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
     });
 });
 
@@ -34,7 +51,112 @@ interactiveCards.forEach(card => {
     });
 });
 
-// --- 3. Relational Database Content Engine for Projects ---
+// --- 3. Premium High-Performance Interactive Gold Constellation Engine ---
+const matrixCanvas = document.getElementById('bg-matrix');
+const ctx = matrixCanvas.getContext('2d');
+
+let canvasWidth = matrixCanvas.width = window.innerWidth;
+let canvasHeight = matrixCanvas.height = window.innerHeight;
+
+const pointCluster = [];
+const clusterCap = 55; 
+let mouseTrackingVector = { x: null, y: null, radius: 180 };
+
+class GoldStarNode {
+    constructor() {
+        this.coordX = Math.random() * canvasWidth;
+        this.coordY = Math.random() * canvasHeight;
+        this.radius = Math.random() * 2.5 + 1.5;
+        this.baseRadius = this.radius;
+        this.vectorX = Math.random() * 0.5 - 0.2;
+        this.vectorY = Math.random() * 0.5 - 0.2;
+        this.glowIntensity = Math.random();
+        this.glowDirection = Math.random() > 0.5 ? 0.01 : -0.01;
+    }
+    
+    cycle() {
+        this.coordX += this.vectorX;
+        this.coordY += this.vectorY;
+        
+        if (this.coordX < 0 || this.coordX > canvasWidth) this.vectorX *= -1;
+        if (this.coordY < 0 || this.coordY > canvasHeight) this.vectorY *= -1;
+
+        this.glowIntensity += this.glowDirection;
+        if (this.glowIntensity > 1 || this.glowIntensity < 0.2) this.glowDirection *= -1;
+
+        if (mouseTrackingVector.x !== null && mouseTrackingVector.y !== null) {
+            let dx = mouseTrackingVector.x - this.coordX;
+            let dy = mouseTrackingVector.y - this.coordY;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < mouseTrackingVector.radius) {
+                if (this.radius < this.baseRadius * 1.8) this.radius += 0.2;
+            } else if (this.radius > this.baseRadius) {
+                this.radius -= 0.1;
+            }
+        }
+    }
+    
+    render() {
+        ctx.beginPath();
+        ctx.arc(this.coordX, this.coordY, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(252, 166, 31, ${this.glowIntensity})`; 
+        ctx.fill();
+    }
+}
+
+for (let i = 0; i < clusterCap; i++) {
+    pointCluster.push(new GoldStarNode());
+}
+
+window.addEventListener('mousemove', (e) => {
+    mouseTrackingVector.x = e.clientX;
+    mouseTrackingVector.y = e.clientY;
+});
+
+window.addEventListener('mouseleave', () => {
+    mouseTrackingVector.x = null;
+    mouseTrackingVector.y = null;
+});
+
+function backgroundRuntimePipeline() {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    
+    pointCluster.forEach(node => {
+        node.cycle();
+        node.render();
+    });
+    
+    for (let current = 0; current < pointCluster.length; current++) {
+        for (let comparison = current + 1; comparison < pointCluster.length; comparison++) {
+            const p1 = pointCluster[current];
+            const p2 = pointCluster[comparison];
+            
+            const distanceX = p1.coordX - p2.coordX;
+            const distanceY = p1.coordY - p2.coordY;
+            const separationScalar = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+            
+            if (separationScalar < 150) {
+                ctx.beginPath();
+                ctx.moveTo(p1.coordX, p1.coordY);
+                ctx.lineTo(p2.coordX, p2.coordY);
+                
+                ctx.strokeStyle = `rgba(252, 166, 31, ${0.15 * (1 - separationScalar / 150)})`; 
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+    requestAnimationFrame(backgroundRuntimePipeline);
+}
+backgroundRuntimePipeline();
+
+window.addEventListener('resize', () => {
+    canvasWidth = matrixCanvas.width = window.innerWidth;
+    canvasHeight = matrixCanvas.height = window.innerHeight;
+});
+
+// --- 4. Relational Database Content Engine for Projects ---
 const localProjectRecords = {
   'portfolio': {
         title: "Personal Portfolio Workspace",
@@ -297,13 +419,15 @@ function tiltLogoText(event) {
     logoContainer.style.transform = `rotateX(${rotationalX}deg) rotateY(${rotationalY}deg) scale(1.02)`;
 }
 
-// FIX: Added missing function to handle onmouseleave logo reset safely
+// Fixed missing fallback routine called by index.html template onmouseleave
 function resetLogoText() {
     const logoContainer = document.querySelector('.interactive-logo-text');
     if (logoContainer) {
         logoContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
     }
 }
+
+// --- 5. Page Loading & Component Observation Pipelines ---
 window.addEventListener('load', () => {
     const preloader = document.getElementById('page-loader');
     if (preloader) {
@@ -339,6 +463,7 @@ const scrollSpyObserver = new IntersectionObserver((entries) => {
 
 pageSections.forEach(section => scrollSpyObserver.observe(section));
 
+// --- 6. Typing Carousel Component Engine ---
 const typingPhrases = [
     "Frontend Developer.",
     "Data Analytics Enthusiast.",
@@ -383,6 +508,7 @@ function runTypingCarouselPipeline() {
 
 document.addEventListener('DOMContentLoaded', runTypingCarouselPipeline);
 
+// --- 7. Project Portfolio Category Filter Pipeline ---
 function filterProjects(selectedCategory) {
     const allFilterButtons = document.querySelectorAll('.filter-btn');
     allFilterButtons.forEach(btn => btn.classList.remove('active'));
@@ -403,6 +529,7 @@ function filterProjects(selectedCategory) {
     });
 }
 
+// --- 8. Dynamic Light / Dark Variable Theme Controller ---
 function toggleTheme() {
     const rootElement = document.documentElement;
     const currentTheme = rootElement.getAttribute('data-theme');

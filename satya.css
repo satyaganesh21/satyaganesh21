@@ -28,13 +28,14 @@ body {
 
 #bg-matrix {
     position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
     z-index: -1;
     pointer-events: none;
-    background: radial-gradient(circle at 50% 50%, #140e03 0%, #000000 100%);
+    background: #000000; /* Crisp pure black backdrop sheet */
 }
-
 nav {
     position: fixed;
     top: 0; left: 0; width: 100%;
@@ -640,38 +641,99 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     overflow: hidden;
 }
 
-/* Light theme support */
+/* ==========================================================================
+   DYNAMIC LIGHT THEME SYSTEM OVERRIDES
+   ========================================================================== */
 [data-theme="light"] {
-    --bg-dark: #f8fafc;        
-    --text-light: #0f172a;     
-    --text-muted: #64748b;     
-    --glass-bg: rgba(255, 255, 255, 0.75); 
-    --glass-border: rgba(15, 23, 42, 0.08); 
+    --bg-dark: #fbf9f4;         /* Soft Cream/White Background */
+    --text-light: #000000;      /* Crisp Pure Black Main Text */
+    --text-muted: #4b5563;      /* Dark Charcoal Muted Text */
+    --glass-bg: #ffffff;        /* Solid Pure White Base Blocks */
+    --glass-border: rgba(0, 0, 0, 0.08); /* Soft Dark Outline Edges */
 }
+
+/* Force Canvas Matrix to a light backdrop sheet */
+[data-theme="light"] #bg-matrix {
+    background: radial-gradient(circle at 50% 50%, #f7f3e8 0%, #fbf9f4 100%) !important;
+}
+
+/* Ensure Nav and interactive components flip correctly */
+[data-theme="light"] nav { 
+    background: rgba(251, 249, 244, 0.92); 
+    border-bottom: 1px solid var(--glass-border);
+}
+
 [data-theme="light"] .logo-text span {
-    background: linear-gradient(135deg, #0f172a 30%, var(--primary-color) 70%);
-    -webkit-background-clip: text;
+    background: linear-gradient(135deg, #000000 30%, var(--primary-color) 70%) !important;
+    -webkit-background-clip: text !important;
 }
-[data-theme="light"] nav { background: rgba(248, 250, 252, 0.9); }
+
+/* Fix Card Blocks to clear out transparent dark layers */
+[data-theme="light"] .tilt-card,
+[data-theme="light"] .project-card,
+[data-theme="light"] .timeline-item,
+[data-theme="light"] .skill-node,
+[data-theme="light"] .about-card,
+[data-theme="light"] .contact-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Input Fields and Forms Styling */
 [data-theme="light"] .contact-form input, 
 [data-theme="light"] .contact-form textarea,
 [data-theme="light"] .chat-input-area input {
-    background: #ffffff;
-    color: #0f172a;
-    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: #f3f4f6;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 [data-theme="light"] .contact-form input:focus, 
 [data-theme="light"] .contact-form textarea:focus,
 [data-theme="light"] .chat-input-area input:focus {
     border-color: var(--primary-color);
+    background: #ffffff;
 }
+
+/* Chat Widget System Messaging Overrides */
 [data-theme="light"] .system-msg {
-    background: #edf2f7;
-    color: #0f172a;
-    border: 1px solid rgba(15, 23, 42, 0.05);
+    background: #f3f4f6;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
-[data-theme="light"] .modal-content { background: #ffffff !important; }
+
+[data-theme="light"] .chat-window-layout {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] .chat-header {
+    background: #f9fafb;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .chat-header h4 {
+    color: #000000;
+}
+
+[data-theme="light"] .modal-content { 
+    background: #ffffff !important; 
+}
+
 [data-theme="light"] .close-chat,
-[data-theme="light"] .modal-close { color: #64748b; }
+[data-theme="light"] .modal-close { 
+    color: #4b5563; 
+}
+
 [data-theme="light"] .close-chat:hover,
-[data-theme="light"] .modal-close:hover { color: var(--primary-color); }
+[data-theme="light"] .modal-close:hover { 
+    color: var(--primary-color); 
+}
+
+[data-theme="light"] footer {
+    background: #f3f4f6;
+    color: #4b5563;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
