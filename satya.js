@@ -74,8 +74,7 @@ class KineticNode {
             }
         }
     }
-    
-    render() {
+render() {
         ctx.beginPath();
         let gradient3D = ctx.createRadialGradient(
             this.coordX - this.radius * 0.3, 
@@ -85,10 +84,10 @@ class KineticNode {
             this.coordY, 
             this.radius
         );
-        // Cyber Shaded 3D Orbs (Cyan Core with Purple outer shells)
-        gradient3D.addColorStop(0, 'rgba(0, 229, 255, 0.85)');   
-        gradient3D.addColorStop(0.5, 'rgba(168, 85, 247, 0.3)'); 
-        gradient3D.addColorStop(1, 'rgba(168, 85, 247, 0.01)');
+        // Clean Tech 3D Orbs: Radiant Sky Blue Core down to transparent Electric Blue
+        gradient3D.addColorStop(0, 'rgba(56, 189, 248, 0.9)');   
+        gradient3D.addColorStop(0.5, 'rgba(0, 112, 243, 0.35)'); 
+        gradient3D.addColorStop(1, 'rgba(0, 112, 243, 0.01)');
         
         ctx.arc(this.coordX, this.coordY, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = gradient3D;
@@ -118,7 +117,7 @@ function backgroundRuntimePipeline() {
         node.render();
     });
     
-    // Magnetic Curves rendering with Cyber Neon Purple styles
+    // Magnetic Attraction Curves rendering with premium Blue paths
     for (let current = 0; current < pointCluster.length; current++) {
         for (let comparison = current + 1; comparison < pointCluster.length; comparison++) {
             const p1 = pointCluster[current];
@@ -140,7 +139,8 @@ function backgroundRuntimePipeline() {
                 ctx.moveTo(p1.coordX, p1.coordY);
                 ctx.quadraticCurveTo(controlX, controlY, p2.coordX, p2.coordY);
                 
-                ctx.strokeStyle = `rgba(168, 85, 247, ${0.25 * (1 - separationScalar / 170)})`;
+                // Translucent electric blue connecting lines
+                ctx.strokeStyle = `rgba(0, 112, 243, ${0.22 * (1 - separationScalar / 170)})`;
                 ctx.lineWidth = 0.6;
                 ctx.stroke();
             }
