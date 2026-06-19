@@ -385,13 +385,6 @@ nav {
     display: flex; align-items: center; gap: 8px; color: var(--text-muted); transition: all 0.4s ease; pointer-events: none;
 }
 
-.data-tag.tag-active {
-    background: #fca61f !important;
-    color: #000 !important;
-    box-shadow: 0 0 25px #fca61f !important;
-    transform: translate(-50%, -50%) scale(1.15) !important;
-}
-
 /* Modals Overlay Layouts */
 .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(5,5,8,0.85); backdrop-filter:blur(15px); z-index:5000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.4s ease; }
 .modal-overlay.active { opacity:1; pointer-events:auto; }
@@ -457,7 +450,9 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 
 @media (max-width: 480px) {
     .chat-window-layout { width: calc(100vw - 40px); right: -10px; }
-}/* ==========================================================================
+}
+
+/* ==========================================================================
    RESUME BUTTON ALIGNMENT FIX
    ========================================================================== */
 .buttons {
@@ -483,7 +478,9 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     background: rgba(252, 166, 31, 0.1);
     border-color: var(--primary-color);
     box-shadow: 0 5px 15px rgba(252, 166, 31, 0.15);
-}/* ==========================================================================
+}
+
+/* ==========================================================================
    NEW ADVANCED FEATURES: LOADER & SCROLL SPY STYLES
    ========================================================================== */
 
@@ -553,7 +550,9 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     width: 100%; height: 2px;
     background: var(--primary-color);
     border-radius: 2px;
-}/* ==========================================================================
+}
+
+/* ==========================================================================
    NEW ADVANCED FEATURES: TYPING CAROUSEL & PROJECT FILTERS
    ========================================================================== */
 
@@ -615,6 +614,7 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
     padding: 0 !important;
     border: none !important;
 }
+
 /* ==========================================================================
    OPTION 1 - CLEAN TECH MINIMAL LIGHT THEME
    ========================================================================== */
@@ -667,8 +667,10 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 [data-theme="light"] .close-chat:hover,
 [data-theme="light"] .modal-close:hover {
     color: var(--primary-color);
-}/* ==========================================================================
-   ADVANCED 3D PARALLAX DEPTH LAYERING
+}
+
+/* ==========================================================================
+   ADVANCED 3D PARALLAX DEPTH LAYERING EFFECT
    ========================================================================== */
 
 /* Force elements inside the project card to inherit 3D space */
