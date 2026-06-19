@@ -667,4 +667,33 @@ footer { border-top: 1px solid var(--glass-border); padding: 30px; background: #
 [data-theme="light"] .close-chat:hover,
 [data-theme="light"] .modal-close:hover {
     color: var(--primary-color);
+}/* ==========================================================================
+   ADVANCED 3D PARALLAX DEPTH LAYERING
+   ========================================================================== */
+
+/* Force elements inside the project card to inherit 3D space */
+.project-card .card-meta {
+    transform: translateZ(40px); /* Pushes the entire text area forward */
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+/* Make the specific titles and badges jump out even further! */
+.project-card h3 {
+    transform: translateZ(30px); /* Floating high above the card */
+}
+
+.project-card p {
+    transform: translateZ(15px); /* Floating mid-air */
+}
+
+.project-card .view-more-tag {
+    display: inline-block;
+    transform: translateZ(25px); /* Floating call to action */
+}
+
+.project-card .img-wrapper {
+    transform: translateZ(10px); /* Slight depth for the image frame */
+    border-radius: 12px;
+    overflow: hidden;
 }
