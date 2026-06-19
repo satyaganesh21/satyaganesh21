@@ -34,7 +34,7 @@ interactiveCards.forEach(card => {
     });
 });
 
-// --- 3. Dynamic 3D Floating Particle Background Matrix (Option 5: Cyber Neon Curves) ---
+// --- 3. Dynamic 3D Floating Particle Background Matrix (Option 5: Tech Blue Curves) ---
 const matrixCanvas = document.getElementById('bg-matrix');
 const ctx = matrixCanvas.getContext('2d');
 
@@ -74,7 +74,8 @@ class KineticNode {
             }
         }
     }
-render() {
+    
+    render() {
         ctx.beginPath();
         let gradient3D = ctx.createRadialGradient(
             this.coordX - this.radius * 0.3, 
@@ -84,7 +85,7 @@ render() {
             this.coordY, 
             this.radius
         );
-        // Clean Tech 3D Orbs: Radiant Sky Blue Core down to transparent Electric Blue
+        // Tech Blue Shaded 3D Orbs (Sky Blue Core with Electric Blue outer shells)
         gradient3D.addColorStop(0, 'rgba(56, 189, 248, 0.9)');   
         gradient3D.addColorStop(0.5, 'rgba(0, 112, 243, 0.35)'); 
         gradient3D.addColorStop(1, 'rgba(0, 112, 243, 0.01)');
@@ -117,7 +118,7 @@ function backgroundRuntimePipeline() {
         node.render();
     });
     
-    // Magnetic Attraction Curves rendering with premium Blue paths
+    // Magnetic Attraction Curves rendering with Cyber Tech Blue tracks
     for (let current = 0; current < pointCluster.length; current++) {
         for (let comparison = current + 1; comparison < pointCluster.length; comparison++) {
             const p1 = pointCluster[current];
@@ -139,7 +140,6 @@ function backgroundRuntimePipeline() {
                 ctx.moveTo(p1.coordX, p1.coordY);
                 ctx.quadraticCurveTo(controlX, controlY, p2.coordX, p2.coordY);
                 
-                // Translucent electric blue connecting lines
                 ctx.strokeStyle = `rgba(0, 112, 243, ${0.22 * (1 - separationScalar / 170)})`;
                 ctx.lineWidth = 0.6;
                 ctx.stroke();
@@ -262,13 +262,14 @@ function analyzeMessageSentiment() {
     });
 
     if (matchCounter > 0) {
+        // Updated from purple to clear tech blue validation styles
         meterBox.style.borderColor = "var(--accent-cyan)";
-        meterBox.style.boxShadow = "0 0 10px rgba(0, 229, 255, 0.2)";
+        meterBox.style.boxShadow = "0 0 10px rgba(56, 189, 248, 0.3)";
         meterText.innerText = "🌟 Highly Positive Intent";
         meterText.style.color = "var(--accent-cyan)";
     } else {
         meterBox.style.borderColor = "var(--primary-color)";
-        meterBox.style.boxShadow = "0 0 10px rgba(168, 85, 247, 0.2)";
+        meterBox.style.boxShadow = "0 0 10px rgba(0, 112, 243, 0.3)";
         meterText.innerText = "💼 Professional / Neutral";
         meterText.style.color = "var(--primary-color)";
     }
@@ -422,13 +423,6 @@ function tiltLogoText(event) {
     const rotationalX = (0.5 - (coordinateY / bounds.height)) * maxTiltRotation;
     
     logoContainer.style.transform = `rotateX(${rotationalX}deg) rotateY(${rotationalY}deg) scale(1.02)`;
-}
-
-function resetLogoText() {
-    const logoContainer = document.querySelector('.interactive-logo-text');
-    if (logoContainer) {
-        logoContainer.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
-    }
 }
 
 // ==========================================================================

@@ -270,7 +270,7 @@ nav {
 
 .glitch-text {
     font-size: 4.5rem; font-weight: 900;
-    color: var(--text-light); /* Set name to bold white */
+    color: var(--text-light);
     display: block; line-height: 1.1; margin-bottom: 15px;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
